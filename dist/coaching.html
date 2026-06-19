@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Harry McCahill — Coaching</title>
+<link rel="icon" type="image/svg+xml" href="assets/logo/crest-favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="assets/css/brand.css">
+<link rel="stylesheet" href="https://assets.calendly.com/assets/external/widget.css">
+<script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+<style>
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0; background: var(--mist); color: var(--slate);
+    font-family: var(--sans); font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+  }
+  :root { --gutter: clamp(24px, 6vw, 96px); }
+  img { display: block; }
+  a { color: inherit; }
+
+  /* ============ NAV ============ */
+  .nav {
+    position: fixed; inset: 0 0 auto 0; z-index: 50;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 22px var(--gutter);
+    background: rgba(6,20,29,0.82); backdrop-filter: blur(14px);
+    transition: background 480ms var(--ease), padding 480ms var(--ease);
+  }
+  .nav.scrolled { padding: 14px var(--gutter); }
+  .nav__brand { display: flex; align-items: center; gap: 13px; text-decoration: none; }
+  .nav__brand .wm { font-size: clamp(17px, 1.35vw, 20px); }
+  .nav__links { display: flex; gap: clamp(18px, 2.6vw, 40px); align-items: center; }
+  .nav__links a {
+    font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase;
+    text-decoration: none; color: var(--mist); opacity: 0.82;
+    transition: opacity 320ms var(--ease);
+  }
+  .nav__links a:hover, .nav__links a[aria-current] { opacity: 1; }
+  .nav__links a[aria-current] { color: var(--light); }
+  .nav__links a.cta {
+    border: 1px solid rgba(234,242,242,0.45); border-radius: 999px;
+    padding: 9px 18px;
+  }
+  @media (max-width: 720px) { .nav__links a:not(.cta) { display: none; } }
+
+  /* ============ HERO ============ */
+  .hero {
+    position: relative; min-height: 76svh;
+    display: flex; align-items: flex-end;
+    overflow: hidden; background: var(--abyss);
+  }
+  .hero__img {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    object-fit: cover; object-position: 50% 50%;
+    transform: scale(1.05); animation: heroDrift 26s var(--ease) forwards;
+  }
+  @keyframes heroDrift { to { transform: scale(1); } }
+  @media (prefers-reduced-motion: reduce) { .hero__img { animation: none; transform: none; } }
+  .hero__scrim {
+    position: absolute; inset: 0;
+    background:
+      linear-gradient(90deg, rgba(6,20,29,0.55) 0%, rgba(6,20,29,0.16) 30%, rgba(6,20,29,0) 56%),
+      linear-gradient(180deg, rgba(6,20,29,0.5) 0%, rgba(6,20,29,0) 22%, rgba(6,20,29,0) 50%, rgba(6,20,29,0.78) 100%);
+  }
+  .hero__inner { position: relative; z-index: 2; width: 100%; padding: 0 var(--gutter) clamp(46px, 7vw, 84px); padding-top: 120px; }
+  .hero__eyebrow { margin-bottom: clamp(16px, 2vw, 22px); color: #eaf7f9; text-shadow: 0 1px 3px rgba(6,20,29,0.85), 0 2px 22px rgba(6,20,29,0.92); }
+  .hero h1 {
+    font-family: var(--serif); font-weight: 400; color: var(--mist);
+    font-size: clamp(40px, 5.4vw, 84px);
+    line-height: 0.98; letter-spacing: 0.01em; margin: 0;
+    text-shadow: 0 2px 36px rgba(6,20,29,0.42);
+  }
+  .hero h1 em { font-style: italic; color: var(--light); }
+  .hero__sub {
+    font-family: var(--sans); font-weight: 300; color: var(--mist); opacity: 0.9;
+    font-size: clamp(13px, 1.05vw, 16px); letter-spacing: 0.04em;
+    max-width: 48ch; line-height: 1.6; text-shadow: 0 1px 18px rgba(6,20,29,0.7);
+    margin: clamp(20px, 2.6vw, 30px) 0 0;
+  }
+
+  /* ============ STRIP ============ */
+  .strip { background: var(--abyss); color: var(--mist); padding: clamp(36px, 5vw, 56px) var(--gutter); }
+  .strip__grid {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 1px; background: rgba(124,196,206,0.18);
+    border: 1px solid rgba(124,196,206,0.18);
+  }
+  .strip__cell { background: var(--abyss); padding: clamp(22px, 2.6vw, 34px) clamp(18px, 2vw, 28px); }
+  .strip__num { font-family: var(--serif); font-weight: 400; font-size: clamp(34px, 3.6vw, 56px); line-height: 1; color: var(--mist); }
+  .strip__num span { font-size: 0.42em; color: var(--light); margin-left: 3px; letter-spacing: 0.04em; }
+  .strip__lbl { margin-top: 12px; font-size: 10.5px; letter-spacing: 0.24em; text-transform: uppercase; color: rgba(234,242,242,0.62); line-height: 1.5; }
+  @media (max-width: 720px) { .strip__grid { grid-template-columns: repeat(2, 1fr); } }
+
+  /* ============ SECTION SHELL ============ */
+  .section { position: relative; padding: clamp(72px, 11vw, 150px) var(--gutter); scroll-margin-top: 84px; }
+  .section--light { background: var(--mist); }
+  .section--deep { background: var(--deep); color: rgba(234,242,242,0.84); }
+  .section--coach { background: linear-gradient(180deg, #0b2e42 0%, #155468 42%, #2c7a8c 100%); color: rgba(234,242,242,0.9); }
+  .mark { display: flex; align-items: baseline; gap: 18px; margin-bottom: clamp(40px, 5vw, 64px); }
+  .mark__depth { font-family: var(--crest); font-size: clamp(13px, 1.1vw, 16px); letter-spacing: 0.3em; color: var(--tide); white-space: nowrap; }
+  .section--deep .mark__depth, .section--coach .mark__depth { color: var(--light); }
+  .mark__rule { flex: 1; height: 1px; background: color-mix(in oklab, currentColor 16%, transparent); }
+  .section h2 { font-family: var(--serif); font-weight: 400; font-size: clamp(30px, 3.4vw, 50px); line-height: 1.06; letter-spacing: 0.01em; margin: 0 0 clamp(18px, 2vw, 26px); color: var(--deep); }
+  .section--deep h2, .section--coach h2 { color: var(--mist); }
+  .section h2 em { font-style: italic; color: var(--tide); }
+  .section--deep h2 em, .section--coach h2 em { color: var(--light); }
+  .section .lead { font-size: clamp(15px, 1.12vw, 17px); line-height: 1.8; font-weight: 300; max-width: 60ch; margin: 0 0 1.2em; }
+  .section .lead b { font-weight: 600; color: var(--deep); }
+  .section--deep .lead b, .section--coach .lead b { color: #fff; }
+
+  .two-col { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: clamp(40px, 6vw, 96px); align-items: center; }
+  @media (max-width: 880px) { .two-col { grid-template-columns: 1fr; } }
+  figure.photo { position: relative; margin: 0; }
+  figure.photo img { width: 100%; height: auto; border-radius: 4px; }
+  figure.photo .cap { display: block; margin-top: 12px; font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(234,242,242,0.66); }
+
+  /* ============ APPROACH POINTS ============ */
+  .points { list-style: none; margin: clamp(26px, 3vw, 40px) 0 0; padding: 0; display: grid; gap: 16px; max-width: 58ch; }
+  .points li { display: flex; gap: 16px; align-items: baseline; font-size: clamp(14px, 1.05vw, 16px); line-height: 1.7; font-weight: 300; }
+  .points li::before { content: ""; flex: none; width: 7px; height: 7px; border-radius: 50%; background: var(--light); transform: translateY(-1px); }
+
+  /* ============ COURSE LADDER ============ */
+  .ladder { margin-top: clamp(36px, 4vw, 56px); display: grid; gap: 0; }
+  .course { display: grid; grid-template-columns: clamp(120px, 16vw, 220px) 1fr auto; gap: clamp(20px, 3vw, 48px); align-items: baseline; padding: clamp(22px, 2.6vw, 32px) 0; border-top: 1px solid var(--hair); }
+  .course:last-child { border-bottom: 1px solid var(--hair); }
+  .course__name { font-family: var(--serif); font-size: clamp(20px, 2vw, 30px); color: var(--mist); line-height: 1.1; }
+  .course__name small { display: block; margin-top: 6px; font-family: var(--sans); font-size: 10.5px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--light); }
+  .course__desc { font-size: 14px; font-weight: 300; line-height: 1.65; color: rgba(234,242,242,0.78); max-width: 52ch; }
+  .course__depth { font-family: var(--serif); font-size: clamp(22px, 2.2vw, 34px); color: var(--light); white-space: nowrap; }
+  .course__depth span { font-size: 0.5em; color: rgba(234,242,242,0.6); margin-left: 2px; }
+  @media (max-width: 760px) { .course { grid-template-columns: 1fr; gap: 8px; } .course__depth { margin-top: 4px; } }
+
+  /* ============ LOCATIONS ============ */
+  .locations { margin-top: clamp(34px, 4vw, 52px); display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: color-mix(in oklab, var(--slate) 18%, transparent); border: 1px solid color-mix(in oklab, var(--slate) 18%, transparent); }
+  .loc { background: var(--mist); padding: clamp(24px, 2.8vw, 38px) clamp(20px, 2.2vw, 30px); display: flex; flex-direction: column; gap: 10px; }
+  .loc__home { background: var(--deep); }
+  .loc__place { font-family: var(--serif); font-size: clamp(22px, 2.2vw, 32px); color: var(--deep); line-height: 1.05; }
+  .loc__home .loc__place { color: var(--mist); }
+  .loc__region { font-size: 10.5px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--tide); }
+  .loc__home .loc__region { color: var(--light); }
+  .loc__note { font-size: 13.5px; font-weight: 300; line-height: 1.6; color: var(--slate); }
+  .loc__home .loc__note { color: rgba(234,242,242,0.78); }
+  .loc__tag { margin-top: auto; padding-top: 10px; font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--light); }
+  @media (max-width: 760px) { .locations { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 460px) { .locations { grid-template-columns: 1fr; } }
+
+  /* ============ CAMP DETAIL ============ */
+  .camp-meta { list-style: none; margin: clamp(26px, 3vw, 40px) 0 0; padding: 0; display: grid; gap: 0; max-width: 64ch; }
+  .camp-meta li { display: grid; grid-template-columns: clamp(110px, 14vw, 170px) 1fr; gap: clamp(18px, 3vw, 40px); padding: 16px 0; border-top: 1px solid color-mix(in oklab, #fff 22%, transparent); font-size: clamp(14px, 1.05vw, 16px); font-weight: 300; line-height: 1.6; }
+  .camp-meta li:last-child { border-bottom: 1px solid color-mix(in oklab, #fff 22%, transparent); }
+  .camp-meta .k { font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--light); padding-top: 3px; }
+  .camp-meta .v { color: #f1f9fa; }
+  .camp-meta .v b { font-weight: 600; color: #fff; }
+
+  /* ============ TESTIMONIALS ============ */
+  .refs__grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: clamp(16px, 1.8vw, 26px); margin-top: clamp(34px, 4vw, 52px); }
+  @media (max-width: 760px) { .refs__grid { grid-template-columns: 1fr; } }
+  .ref { background: #fff; border: 1px solid var(--hair); border-radius: 20px; padding: clamp(28px, 3vw, 42px); box-shadow: 0 26px 60px -34px rgba(2,27,46,0.5); display: flex; flex-direction: column; gap: clamp(16px, 1.8vw, 24px); }
+  .ref__mark { font-family: var(--serif); font-size: clamp(40px, 4vw, 56px); line-height: 0.5; color: var(--light); height: 0.42em; }
+  .ref__quote { font-family: var(--serif); font-weight: 400; font-size: clamp(18px, 1.5vw, 23px); line-height: 1.5; color: var(--deep); letter-spacing: 0.005em; margin: 0; }
+  .ref__by { display: flex; align-items: baseline; gap: 12px; margin-top: auto; }
+  .ref__by::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--tide); flex: none; transform: translateY(-1px); }
+  .ref__name { font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--slate); }
+  .ref__name b { color: var(--deep); font-weight: 600; }
+
+  /* ============ CTA ============ */
+  .cta-band { background: var(--mist); text-align: center; padding: clamp(72px, 11vw, 140px) var(--gutter); }
+  .cta-band .depth-label { font-family: var(--crest); font-size: 13px; letter-spacing: 0.34em; color: var(--tide); margin-bottom: 26px; }
+  .cta-band h2 { font-family: var(--serif); font-weight: 400; font-size: clamp(34px, 4.4vw, 64px); line-height: 1.04; color: var(--deep); margin: 0 0 20px; }
+  .cta-band h2 em { font-style: italic; color: var(--tide); }
+  .cta-band p { font-size: clamp(15px, 1.1vw, 17px); font-weight: 300; line-height: 1.8; max-width: 48ch; margin: 0 auto 1em; }
+  .cta-band .btn-row { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; margin-top: 34px; }
+
+  /* ============ BUTTONS ============ */
+  .btn-pill { display: inline-block; text-decoration: none; font-family: var(--sans); font-size: 11.5px; font-weight: 500; letter-spacing: 0.24em; text-transform: uppercase; padding: 15px 30px; border-radius: 999px; white-space: nowrap; transition: background 320ms var(--ease), color 320ms var(--ease), border-color 320ms var(--ease), transform 320ms var(--ease); }
+  .btn-pill:hover { transform: translateY(-1px); }
+  .btn-deep { background: var(--deep); color: var(--mist); }
+  .btn-deep:hover { background: #0c3247; }
+  .btn-light { background: var(--mist); color: var(--deep); }
+  .btn-light:hover { background: #fff; }
+  .btn-ghost-dark { border: 1px solid color-mix(in oklab, var(--slate) 40%, transparent); color: var(--deep); }
+  .btn-ghost-dark:hover { border-color: var(--tide); color: var(--tide); }
+  .btn-ghost-light { border: 1px solid rgba(234,242,242,0.5); color: var(--mist); }
+  .btn-ghost-light:hover { border-color: var(--mist); }
+
+  /* ============ FOOTER ============ */
+  .footer { background: var(--abyss); color: rgba(234,242,242,0.7); padding: clamp(56px, 7vw, 90px) var(--gutter) 40px; }
+  .footer__grid { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 40px; align-items: flex-start; }
+  .footer__tag { font-family: var(--serif); font-style: italic; font-size: 17px; color: rgba(234,242,242,0.85); margin: 0; }
+  .footer__cols { display: flex; gap: clamp(36px, 5vw, 80px); flex-wrap: wrap; }
+  .footer__col h4 { font-size: 10.5px; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(234,242,242,0.5); margin: 0 0 14px; font-weight: 500; }
+  .footer__col a { display: block; font-size: 13.5px; font-weight: 300; text-decoration: none; color: rgba(234,242,242,0.82); margin-bottom: 9px; transition: color 320ms var(--ease); }
+  .footer__col a:hover { color: var(--light); }
+  .footer__base { margin-top: clamp(40px, 5vw, 60px); padding-top: 24px; border-top: 1px solid rgba(234,242,242,0.14); display: flex; flex-wrap: wrap; gap: 16px; justify-content: space-between; font-size: 11.5px; letter-spacing: 0.06em; color: rgba(234,242,242,0.45); }
+
+  /* ============ REVEALS ============ */
+  .reveal { opacity: 0; transform: translateY(26px); transition: opacity 900ms var(--ease), transform 900ms var(--ease); }
+  .reveal[data-d="1"] { transition-delay: 120ms; }
+  .reveal[data-d="2"] { transition-delay: 240ms; }
+  .reveal[data-d="3"] { transition-delay: 360ms; }
+  .reveal.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } }
+</style>
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <a class="nav__brand" href="index.html">
+    <svg class="crest on-dark" width="32" height="58" viewBox="0 0 24 44" aria-hidden="true">
+      <g class="sky">
+        <line x1="12" y1="3" x2="12.6" y2="8"></line>
+        <line x1="12.6" y1="8" x2="12" y2="11"></line>
+        <line x1="12" y1="11" x2="8" y2="15.6"></line>
+        <line x1="12" y1="11" x2="17.4" y2="16.6"></line>
+        <circle cx="12" cy="3" r="1.1"></circle>
+        <circle cx="12.6" cy="8" r="1"></circle>
+        <circle cx="12" cy="11" r="1.2"></circle>
+        <circle cx="8" cy="15.6" r="1"></circle>
+        <circle cx="17.4" cy="16.6" r="1.3"></circle>
+        <line class="stem" x1="12" y1="11" x2="12" y2="33"></line>
+        <line class="surface" x1="5.5" y1="33" x2="18.5" y2="33"></line>
+      </g>
+      <g class="sea">
+        <line class="tideline" x1="12" y1="33" x2="12" y2="39"></line>
+        <circle cx="12" cy="41" r="1.7"></circle>
+      </g>
+    </svg>
+    <span class="wordmark on-dark wm">Harry McCahill</span>
+  </a>
+  <div class="nav__links">
+    <a href="index.html#story">Story</a>
+    <a href="records.html">Records</a>
+    <div class="nav__item has-drop">
+      <a href="coaching.html" class="nav__top" aria-current="page">Coaching</a>
+      <div class="nav__drop">
+        <a href="coaching.html#courses">Courses</a>
+        <a href="coaching.html#oneonone">1:1 Coaching</a>
+        <a href="coaching.html#calendar">Calendar</a>
+        <a href="coaching.html#clients">Clients</a>
+        <a href="coaching.html#referrals">Testimonials</a>
+      </div>
+    </div>
+    <a href="media.html">Media</a>
+    <a href="blog.html">Journal</a>
+    <a href="sponsor.html" class="cta">Partner</a>
+  </div>
+</nav>
+
+<header class="hero" data-screen-label="Coaching hero">
+  <img class="hero__img" src="assets/photos-v2/split-shot-soufriere.jpg" alt="Over-under split shot of Soufrière Bay, Dominica — lush coastline above, clear blue water below">
+  <div class="hero__scrim"></div>
+  <div class="hero__inner">
+    <p class="eyebrow on-dark hero__eyebrow reveal in">AIDA Master Instructor · Soufrière Bay, Dominica</p>
+    <h1 class="reveal in" data-d="1">Calm is <em>taught,</em><br>not forced.</h1>
+    <p class="hero__sub reveal in" data-d="2">From a first held breath to competition depth — courses, depth coaching and camps built on relaxation, efficient technique and a calm nervous system. Not pushing.</p>
+  </div>
+  <span class="credit">Photograph · Allie Reilly</span>
+</header>
+
+<section class="strip" data-screen-label="At a glance">
+  <div class="strip__grid">
+    <div class="strip__cell reveal">
+      <div class="strip__num">Master</div>
+      <div class="strip__lbl">AIDA Instructor rating</div>
+    </div>
+    <div class="strip__cell reveal" data-d="1">
+      <div class="strip__num">250<span>+</span></div>
+      <div class="strip__lbl">Students taught</div>
+    </div>
+    <div class="strip__cell reveal" data-d="2">
+      <div class="strip__num">5</div>
+      <div class="strip__lbl">Countries coached in</div>
+    </div>
+    <div class="strip__cell reveal" data-d="3">
+      <div class="strip__num">All<span>yr</span></div>
+      <div class="strip__lbl">Year-round in Dominica</div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--coach" data-screen-label="The approach">
+  <div class="mark reveal">
+    <span class="mark__depth">I · The approach</span>
+    <span class="mark__rule"></span>
+  </div>
+  <div class="two-col">
+    <div>
+      <h2 class="reveal">Teach the <em>nervous system,</em><br>not just the dive.</h2>
+      <p class="lead reveal" data-d="1">As an <b>AIDA Master Instructor</b>, Harry has certified over 100 students — from first breath-holds to competition depth. The method is the same calm that defines his own diving: relaxation first, efficient technique second, depth as the result — never the goal.</p>
+      <ul class="points reveal" data-d="2">
+        <li>Relaxation and breath-up — where every dive is actually won</li>
+        <li>Equalisation that scales with depth — Frenzel, then mouthfill</li>
+        <li>Streamlined technique and efficient finning — or none at all</li>
+        <li>Safety, rescue and the mental side of going deep, calmly</li>
+      </ul>
+    </div>
+    <figure class="photo reveal" data-d="1">
+      <img src="assets/photos-v2/harry-breath-up.jpg" alt="Harry McCahill floating on his back at the surface, breathing up before a dive">
+      <span class="cap">The breath-up — where every dive is won</span>
+      <span class="credit">Allie Reilly</span>
+    </figure>
+  </div>
+</section>
+
+<section class="section section--deep" id="courses" data-screen-label="Courses">
+  <div class="mark reveal">
+    <span class="mark__depth">II · What you can train</span>
+    <span class="mark__rule"></span>
+  </div>
+  <h2 class="reveal">The AIDA ladder —<br><em>beginner → instructor.</em></h2>
+  <p class="lead reveal" data-d="1">Full AIDA certification pathway, taught year-round in Dominica. Start with your first breath-hold or arrive with depth already and refine it — every course is run in small numbers, at your pace.</p>
+  <div class="ladder reveal" data-d="2">
+    <div class="course">
+      <div class="course__name">AIDA 1<small>Discover</small></div>
+      <div class="course__desc">A one-day introduction — breathing, relaxation and your first breath-hold dives in shallow, confined water. No experience needed.</div>
+      <div class="course__depth">to&nbsp;~10<span>m</span></div>
+    </div>
+    <div class="course">
+      <div class="course__name">AIDA 2<small>Foundation</small></div>
+      <div class="course__desc">The complete foundation — relaxation, equalisation, finning technique, buddy safety and rescue. The real start of depth freediving.</div>
+      <div class="course__depth">to&nbsp;~20<span>m</span></div>
+    </div>
+    <div class="course">
+      <div class="course__name">AIDA 3<small>Advanced</small></div>
+      <div class="course__desc">Free immersion, the first mouthfill, refined technique and longer dives — building the toolkit to keep descending comfortably.</div>
+      <div class="course__depth">to&nbsp;~30<span>m</span></div>
+    </div>
+    <div class="course">
+      <div class="course__name">AIDA 4<small>Master</small></div>
+      <div class="course__desc">Advanced equalisation, packing, and the calm of real depth — for divers committing to the deep end of the sport.</div>
+      <div class="course__depth">to&nbsp;~40<span>m</span></div>
+    </div>
+    <div class="course">
+      <div class="course__name">Instructor<small>Teach</small></div>
+      <div class="course__desc">For divers ready to teach — instructor development and crossover, mentored by a Master Instructor. By application.</div>
+      <div class="course__depth">Pro</div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--light" id="oneonone" data-screen-label="1:1 Coaching">
+  <div class="mark reveal">
+    <span class="mark__depth">III · 1:1 Coaching</span>
+    <span class="mark__rule"></span>
+  </div>
+  <div class="two-col">
+    <div>
+      <h2 class="reveal">Coaching built<br>around <em>you.</em></h2>
+      <p class="lead reveal" data-d="1">Beyond the set courses, Harry takes on a small number of divers for ongoing one-to-one coaching — your technique, your goals, your timeline. It starts with a discovery call to understand where you are and where you want to get to.</p>
+      <ul class="points reveal" data-d="2">
+        <li>A plan shaped around your current depth and goals</li>
+        <li>Video review, dive analysis and personal feedback</li>
+        <li>Dryland support and breath-work between sessions</li>
+        <li>Competition prep and dive planning when you're ready</li>
+      </ul>
+      <div style="margin-top: clamp(28px, 3.4vw, 42px); display:flex; gap:14px; flex-wrap:wrap;" class="reveal" data-d="3">
+        <a href="https://calendly.com/harry-mccahill/discovery-call" class="btn-pill btn-deep" data-calendly>Book a call</a>
+      </div>
+    </div>
+    <figure class="photo reveal" data-d="1">
+      <img src="assets/photos-v2/harry-double-k.jpg" alt="Two freedivers on the surface beside the line in Soufrière Bay, Dominica">
+      <span class="cap">One-to-one, by the line</span>
+      <span class="credit">Allie Reilly</span>
+    </figure>
+  </div>
+</section>
+
+<section class="section section--coach" data-screen-label="Depth camps">
+  <div class="mark reveal">
+    <span class="mark__depth">IV · Depth camps</span>
+    <span class="mark__rule"></span>
+  </div>
+  <div class="two-col">
+    <figure class="photo reveal">
+      <img src="assets/photos-v2/harry-line-descent.jpg" alt="Three freedivers descending the line into deep blue water, Soufrière Bay, Dominica">
+      <span class="cap">Coached line sessions · Soufrière Bay</span>
+      <span class="credit">Daan Verhoeven</span>
+    </figure>
+    <div>
+      <h2 class="reveal">Regular depth camps<br>in <em>Dominica.</em></h2>
+      <p class="lead reveal" data-d="1">Several times a year, Harry runs small-group depth camps in Soufrière Bay — one of the world's premier depth-training locations. <b>No waves, no current, no boat ride</b> — just deep, warm, sheltered water a few fin-kicks from shore.</p>
+      <ul class="camp-meta reveal" data-d="2">
+        <li><span class="k">Where</span><span class="v"><b>Soufrière Bay, Dominica</b> — sheltered, volcanic, deep right off the shore</span></li>
+        <li><span class="k">Who</span><span class="v">AIDA 3+ divers and competitors working on depth, in small groups</span></li>
+        <li><span class="k">Water</span><span class="v">Warm and still year-round · over 100&nbsp;m within swimming distance</span></li>
+        <li><span class="k">Coaching</span><span class="v">Daily coached line sessions, video review, dive planning and safety</span></li>
+      </ul>
+      <div style="margin-top: clamp(28px, 3.4vw, 42px); display:flex; gap:14px; flex-wrap:wrap;" class="reveal" data-d="3">
+        <a href="mailto:harry.mccahill@gmail.com?subject=Depth%20camp%20enquiry" class="btn-pill btn-light">Enquire about a camp</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--deep" id="calendar" data-screen-label="Dates & calendar">
+  <div class="mark reveal">
+    <span class="mark__depth">V · Dates &amp; calendar</span>
+    <span class="mark__rule"></span>
+  </div>
+  <h2 class="reveal">When we <em>dive.</em></h2>
+  <p class="lead reveal" data-d="1">Private courses and coaching run <b>year-round</b> in Dominica — booked around your travel. Group depth camps are scheduled several times a year and released seasonally.</p>
+  <ul class="camp-meta reveal" data-d="2">
+    <li><span class="k">Courses</span><span class="v"><b>Year-round</b> · private &amp; small-group, by arrangement</span></li>
+    <li><span class="k">Depth camps</span><span class="v">Several intakes a year · small groups in Soufrière Bay</span></li>
+    <li><span class="k">Competition</span><span class="v">Coaching &amp; support around the international depth season</span></li>
+  </ul>
+  <div style="margin-top: clamp(28px, 3.4vw, 42px); display:flex; gap:14px; flex-wrap:wrap;" class="reveal" data-d="3">
+    <a href="mailto:harry.mccahill@gmail.com?subject=Upcoming%20dates" class="btn-pill btn-light">Request upcoming dates</a>
+  </div>
+</section>
+
+<section class="section section--light" data-screen-label="Where I've coached">
+  <div class="mark reveal">
+    <span class="mark__depth">VI · Around the world</span>
+    <span class="mark__rule"></span>
+  </div>
+  <h2 class="reveal">One bay at home,<br><em>many</em> waters abroad.</h2>
+  <p class="lead reveal" data-d="1">Dominica is home — but the work has taken Harry to freediving's great depth destinations, coaching and diving across four more countries.</p>
+  <div class="locations reveal" data-d="2">
+    <div class="loc loc__home">
+      <div class="loc__region">Home base</div>
+      <div class="loc__place">Dominica</div>
+      <div class="loc__note">Soufrière Bay — year-round courses, coaching and depth camps.</div>
+      <div class="loc__tag">Caribbean</div>
+    </div>
+    <div class="loc">
+      <div class="loc__region">Mexico</div>
+      <div class="loc__place">Baja California</div>
+      <div class="loc__note">The Sea of Cortez — deep, blue and warm on the Pacific side.</div>
+    </div>
+    <div class="loc">
+      <div class="loc__region">Mexico</div>
+      <div class="loc__place">Cenotes of the Yucatán</div>
+      <div class="loc__note">Still, glassy freshwater caverns — silent depth in the jungle.</div>
+    </div>
+    <div class="loc">
+      <div class="loc__region">Indian Ocean</div>
+      <div class="loc__place">Maldives</div>
+      <div class="loc__note">Atoll water — clear, warm and endless blue below.</div>
+    </div>
+    <div class="loc">
+      <div class="loc__region">Europe</div>
+      <div class="loc__place">France</div>
+      <div class="loc__note">Coaching and diving in the Mediterranean and beyond.</div>
+    </div>
+    <div class="loc">
+      <div class="loc__region">Europe</div>
+      <div class="loc__place">Greece</div>
+      <div class="loc__note">Calm Aegean depth — a heartland of the sport.</div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--deep" id="clients" data-screen-label="Who I coach">
+  <div class="mark reveal">
+    <span class="mark__depth">VII · Who I coach</span>
+    <span class="mark__rule"></span>
+  </div>
+  <h2 class="reveal">From first breath<br>to <em>competition</em> depth.</h2>
+  <p class="lead reveal" data-d="1">Over 250 divers have trained with Harry — and the same calm method scales from someone who has never held their breath underwater to athletes chasing national records.</p>
+  <div class="locations reveal" data-d="2" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));">
+    <div class="loc">
+      <div class="loc__region">First breath</div>
+      <div class="loc__place">Complete beginners</div>
+      <div class="loc__note">Never dived on a single breath before? Start here — calm, unhurried and safe.</div>
+    </div>
+    <div class="loc">
+      <div class="loc__region">Recreational</div>
+      <div class="loc__place">Club &amp; ocean divers</div>
+      <div class="loc__note">Build confidence, depth and technique for the diving you already love.</div>
+    </div>
+    <div class="loc loc__home">
+      <div class="loc__region">Performance</div>
+      <div class="loc__place">Competitive athletes</div>
+      <div class="loc__note">Depth coaching, dive planning and competition prep — to national level and beyond.</div>
+      <div class="loc__tag">Comp prep</div>
+    </div>
+    <div class="loc">
+      <div class="loc__region">Pro</div>
+      <div class="loc__place">Instructor candidates</div>
+      <div class="loc__note">Mentoring for divers ready to teach, toward AIDA instructor ratings.</div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS — placeholder quotes; replace text + attributions with real client words. -->
+<section class="section section--light" id="referrals" data-screen-label="Testimonials">
+  <div class="mark reveal">
+    <span class="mark__depth">VIII · In their words</span>
+    <span class="mark__rule"></span>
+  </div>
+  <h2 class="reveal">What it feels<br>like to <em>train.</em></h2>
+  <p class="lead reveal" data-d="1">A few words from divers who have trained with Harry — from a first held breath to competition depth.</p>
+  <div class="refs__grid">
+    <figure class="ref reveal" data-d="1">
+      <span class="ref__mark" aria-hidden="true">&ldquo;</span>
+      <blockquote class="ref__quote">I went from nervous on the surface to calm at thirty metres in four days. Harry never once pushed — he just made the depth feel like the safest place to be.</blockquote>
+      <figcaption class="ref__by"><span class="ref__name"><b>Sarah</b> · AIDA 2 · United Kingdom</span></figcaption>
+    </figure>
+    <figure class="ref reveal" data-d="2">
+      <span class="ref__mark" aria-hidden="true">&ldquo;</span>
+      <blockquote class="ref__quote">The calmest, most patient coaching I have had. Every session ended with me wanting to go slower, not deeper — and the depth came anyway.</blockquote>
+      <figcaption class="ref__by"><span class="ref__name"><b>Marco</b> · Club diver · Italy</span></figcaption>
+    </figure>
+    <figure class="ref reveal" data-d="1">
+      <span class="ref__mark" aria-hidden="true">&ldquo;</span>
+      <blockquote class="ref__quote">Harry rebuilt my dive from the breath-up down. Two national-record attempts later, the difference is all in the relaxation he taught me.</blockquote>
+      <figcaption class="ref__by"><span class="ref__name"><b>Elise</b> · Competitor · France</span></figcaption>
+    </figure>
+    <figure class="ref reveal" data-d="2">
+      <span class="ref__mark" aria-hidden="true">&ldquo;</span>
+      <blockquote class="ref__quote">My first time holding my breath underwater, and I never felt rushed or unsafe. I left the course wanting to make this a part of my life.</blockquote>
+      <figcaption class="ref__by"><span class="ref__name"><b>Tom</b> · First course · Australia</span></figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="cta-band" data-screen-label="CTA">
+  <p class="depth-label reveal">Start your training</p>
+  <h2 class="reveal" data-d="1">Learn to <em>let go.</em></h2>
+  <p class="reveal" data-d="2">Take your first course, deepen an existing one, or join a depth camp in Dominica. Tell me where you are and where you want to get to.</p>
+  <div class="btn-row reveal" data-d="3">
+    <a href="mailto:harry.mccahill@gmail.com" class="btn-pill btn-deep">Get in touch</a>
+    <a href="records.html" class="btn-pill btn-ghost-dark">See the records</a>
+  </div>
+</section>
+
+<footer class="footer" data-screen-label="Footer">
+  <div class="footer__grid">
+    <div>
+      <div style="display:flex;align-items:center;gap:14px;margin-bottom:18px;">
+        <svg class="crest on-dark" width="22" height="40" viewBox="0 0 24 44" aria-hidden="true">
+          <g class="sky">
+            <line x1="12" y1="3" x2="12.6" y2="8"></line>
+            <line x1="12.6" y1="8" x2="12" y2="11"></line>
+            <line x1="12" y1="11" x2="8" y2="15.6"></line>
+            <line x1="12" y1="11" x2="17.4" y2="16.6"></line>
+            <circle cx="12" cy="3" r="1.1"></circle>
+            <circle cx="12.6" cy="8" r="1"></circle>
+            <circle cx="12" cy="11" r="1.2"></circle>
+            <circle cx="8" cy="15.6" r="1"></circle>
+            <circle cx="17.4" cy="16.6" r="1.3"></circle>
+            <line class="stem" x1="12" y1="11" x2="12" y2="33"></line>
+            <line class="surface" x1="5.5" y1="33" x2="18.5" y2="33"></line>
+          </g>
+          <g class="sea">
+            <line class="tideline" x1="12" y1="33" x2="12" y2="39"></line>
+            <circle cx="12" cy="41" r="1.7"></circle>
+          </g>
+        </svg>
+        <span class="wordmark on-dark" style="font-size:17px;">Harry McCahill</span>
+      </div>
+      <p class="footer__tag">Fall calm, rise strong</p>
+    </div>
+    <div class="footer__cols">
+      <div class="footer__col">
+        <h4>Site</h4>
+        <a href="index.html#story">Story</a>
+        <a href="records.html">Records</a>
+        <a href="coaching.html">Coaching</a>
+        <a href="media.html">Media</a>
+        <a href="blog.html">Journal</a>
+        <a href="sponsor.html">Partnership</a>
+      </div>
+      <div class="footer__col">
+        <h4>Train</h4>
+        <a href="mailto:harry.mccahill@gmail.com?subject=Course%20enquiry">Book a course</a>
+        <a href="mailto:harry.mccahill@gmail.com?subject=Depth%20camp%20enquiry">Depth camps</a>
+        <a href="https://blueelementfreediving.com" target="_blank" rel="noopener">Blue Element Freediving</a>
+      </div>
+      <div class="footer__col">
+        <h4>Follow</h4>
+        <a href="https://instagram.com/harrymccahill" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://www.tiktok.com/@harryomccahill" target="_blank" rel="noopener">TikTok</a>
+        <a href="https://www.youtube.com/@harrymccahillfreediver" target="_blank" rel="noopener">YouTube</a>
+        <a href="https://www.facebook.com/harrymccahillfreediver" target="_blank" rel="noopener">Facebook</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer__base">
+    <span>© 2026 Harry McCahill · Dominica</span>
+    <span>Photography · Allie Reilly</span>
+  </div>
+</footer>
+
+<script>
+  const nav = document.getElementById('nav');
+  addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 40), { passive: true });
+
+  const pending = [...document.querySelectorAll('.reveal:not(.in)')];
+  function checkReveals() {
+    const vh = innerHeight;
+    for (let i = pending.length - 1; i >= 0; i--) {
+      const r = pending[i].getBoundingClientRect();
+      if (r.top < vh * 0.9 && r.bottom > 0) {
+        pending[i].classList.add('in');
+        pending.splice(i, 1);
+      }
+    }
+  }
+  addEventListener('scroll', checkReveals, { passive: true });
+  addEventListener('resize', checkReveals);
+  checkReveals();
+
+  // Calendly: open booking links in a popup modal instead of navigating away
+  document.querySelectorAll('a[data-calendly]').forEach(a => {
+    a.addEventListener('click', e => {
+      if (window.Calendly) {
+        e.preventDefault();
+        Calendly.initPopupWidget({ url: a.getAttribute('href') });
+      }
+    });
+  });
+</script>
+
+</body>
+</html>

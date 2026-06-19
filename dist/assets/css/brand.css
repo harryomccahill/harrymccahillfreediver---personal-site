@@ -1,0 +1,239 @@
+/* ============================================================
+   HARRY McCAHILL — Personal Brand
+   "Depth through stillness"
+   Shared design tokens + components
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Manrope:wght@300;400;500;600&family=Cinzel:wght@400;500&display=swap');
+
+:root {
+  /* --- Palette: "Depth through Stillness" --- */
+  --abyss:  #06141D;
+  --deep:   #0E3A52;
+  --tide:   #2C7A8C;
+  --light:  #7CC4CE;
+  --mist:   #EAF2F2;
+  --slate:  #4A5A62;
+
+  --deep-72: rgba(14, 58, 82, 0.72);
+  --abyss-88: rgba(6, 20, 29, 0.88);
+  --mist-60: rgba(234, 242, 242, 0.60);
+  --mist-40: rgba(234, 242, 242, 0.40);
+  --hair: rgba(124, 196, 206, 0.22);
+
+  /* --- Type · EB Garamond + Manrope + Cinzel (per Brand Foundation) --- */
+  --display: 'EB Garamond', Georgia, serif;
+  --serif:   'EB Garamond', Georgia, serif;
+  --sans:    'Manrope', system-ui, -apple-system, sans-serif;
+  --crest:   'Cinzel', Georgia, serif;
+
+  /* --- Motion (slow, weightless) --- */
+  --dur: 320ms;
+  --dur-slow: 900ms;
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+
+  /* --- Rhythm --- */
+  --gutter: clamp(24px, 6vw, 120px);
+  --shadow-deep: 0 30px 80px -30px rgba(6, 20, 29, 0.55);
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+
+body {
+  margin: 0;
+  font-family: var(--sans);
+  font-weight: 400;
+  color: var(--slate);
+  background: var(--mist);
+  line-height: 1.6;
+  letter-spacing: 0.01em;
+}
+
+img { display: block; max-width: 100%; }
+
+/* ---------- Type primitives ---------- */
+.eyebrow {
+  font-family: var(--sans);
+  font-weight: 500;
+  font-size: clamp(10px, 0.78vw, 13px);
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+  color: var(--tide);
+  margin: 0;
+}
+.eyebrow.on-dark { color: var(--light); }
+
+.display {
+  font-family: var(--display);
+  font-weight: 400;
+  line-height: 1.02;
+  letter-spacing: 0.01em;
+  color: var(--deep);
+  margin: 0;
+}
+
+.lede {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(20px, 2.1vw, 30px);
+  line-height: 1.42;
+  color: var(--slate);
+  letter-spacing: 0.005em;
+  margin: 0;
+}
+
+p { text-wrap: pretty; }
+
+/* ---------- Tagline lockup ---------- */
+.tagline {
+  font-family: var(--sans);
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: 0.52em;
+  color: var(--mist);
+  margin: 0;
+}
+
+/* ---------- Wordmark — EB Garamond, matching the logo lockup ---------- */
+.wordmark {
+  font-family: var(--serif);
+  font-weight: 500;
+  letter-spacing: 0.13em;
+  color: var(--deep);
+  white-space: nowrap;
+}
+.wordmark.on-dark { color: var(--mist); }
+
+/* ---------- Latin crest line — Cinzel, formal use only ---------- */
+.crest-line {
+  font-family: var(--crest);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--tide);
+}
+
+/* ---------- Cancer crest — the brand mark (constellation + line + dot) ---------- */
+.crest { display: inline-block; vertical-align: middle; }
+.crest g { fill: none; stroke-linecap: round; }
+.crest line { stroke-width: 1.1; }
+.crest .stem { stroke-width: 1.4; }
+.crest .surface { stroke-width: 1; opacity: 0.5; }
+.crest .tideline { stroke-width: 1.4; }
+.crest .sky { stroke: var(--deep); }
+.crest .sky circle { fill: var(--deep); stroke: none; }
+.crest .sea { stroke: var(--tide); }
+.crest .sea circle { fill: var(--tide); stroke: none; }
+.crest.on-dark .sky { stroke: var(--mist); }
+.crest.on-dark .sky circle { fill: var(--mist); }
+.crest.on-dark .sea { stroke: var(--light); }
+.crest.on-dark .sea circle { fill: var(--light); }
+
+/* ---------- Photograph credit — quiet, vertical, editorial ---------- */
+.credit {
+  position: absolute;
+  right: 13px; bottom: 15px; z-index: 2;
+  writing-mode: vertical-rl;
+  white-space: nowrap;
+  font-family: var(--sans);
+  font-weight: 500;
+  font-size: 9px;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--mist);
+  opacity: 0.62;
+  text-shadow: 0 1px 8px rgba(6, 20, 29, 0.7);
+  pointer-events: none;
+}
+.credit.on-light {
+  color: var(--slate);
+  opacity: 0.5;
+  text-shadow: none;
+}
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+  font-family: var(--sans);
+  font-weight: 500;
+  font-size: 13px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 15px 30px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: transform var(--dur) var(--ease), background var(--dur) var(--ease),
+              color var(--dur) var(--ease), border-color var(--dur) var(--ease);
+}
+.btn--solid { background: var(--deep); color: var(--mist); }
+.btn--solid:hover { transform: translateY(-2px); background: var(--tide); }
+.btn--light { background: var(--light); color: var(--abyss); }
+.btn--light:hover { transform: translateY(-2px); background: var(--mist); }
+.btn--ghost { background: transparent; color: var(--mist); border-color: var(--mist-40); }
+.btn--ghost:hover { transform: translateY(-2px); border-color: var(--mist); background: rgba(234,242,242,0.06); }
+.btn--ghost-dark { background: transparent; color: var(--deep); border-color: rgba(14,58,82,0.28); }
+.btn--ghost-dark:hover { transform: translateY(-2px); border-color: var(--deep); }
+
+/* ---------- Layout helpers ---------- */
+.wrap { width: min(1240px, 100% - calc(var(--gutter) * 2)); margin-inline: auto; }
+.section { padding-block: clamp(72px, 12vw, 168px); }
+
+.dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--tide); flex: none; margin-top: 0.62em;
+}
+
+/* ---------- Reveal animation ---------- */
+.reveal { opacity: 0; transform: translateY(26px); transition: opacity var(--dur-slow) var(--ease), transform var(--dur-slow) var(--ease); }
+.reveal.in { opacity: 1; transform: none; }
+.reveal[data-d="1"] { transition-delay: 0.08s; }
+.reveal[data-d="2"] { transition-delay: 0.16s; }
+.reveal[data-d="3"] { transition-delay: 0.24s; }
+.reveal[data-d="4"] { transition-delay: 0.32s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+}
+
+/* ---------- Selection ---------- */
+::selection { background: var(--light); color: var(--abyss); }
+
+/* ---------- Nav dropdown (shared across v2 pages) ---------- */
+.nav__item { position: relative; display: flex; align-items: center; }
+.nav__top { display: inline-flex; align-items: center; gap: 0.5em; cursor: pointer; }
+.nav__top::after {
+  content: ""; width: 5px; height: 5px;
+  border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor;
+  transform: rotate(45deg); margin-top: -2px; opacity: 0.6;
+  transition: transform var(--dur) var(--ease), opacity var(--dur) var(--ease), margin var(--dur) var(--ease);
+}
+.nav__item:hover .nav__top::after,
+.nav__item:focus-within .nav__top::after { transform: rotate(-135deg); margin-top: 2px; opacity: 1; }
+.nav__drop {
+  position: absolute; top: 100%; left: 50%;
+  margin-top: 18px; min-width: 180px; padding: 10px;
+  background: rgba(6,20,29,0.94); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(124,196,206,0.22); border-radius: 16px;
+  box-shadow: 0 28px 66px -28px rgba(2,27,46,0.85);
+  display: grid; gap: 2px;
+  opacity: 0; visibility: hidden; transform: translate(-50%, 8px);
+  transition: opacity var(--dur) var(--ease), transform var(--dur) var(--ease), visibility var(--dur);
+  z-index: 60;
+}
+.nav__drop::before { content: ""; position: absolute; left: 0; right: 0; top: -18px; height: 18px; }
+.nav__item:hover .nav__drop,
+.nav__item:focus-within .nav__drop { opacity: 1; visibility: visible; transform: translate(-50%, 0); }
+.nav .nav__drop a {
+  display: block; padding: 10px 14px; border-radius: 9px;
+  font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--mist); opacity: 0.82; white-space: nowrap; text-decoration: none;
+  transition: background var(--dur) var(--ease), color var(--dur) var(--ease), opacity var(--dur) var(--ease);
+}
+.nav .nav__drop a:hover { background: rgba(124,196,206,0.14); color: var(--light); opacity: 1; }
+@media (max-width: 720px) { .nav__item { display: none; } .nav__drop { display: none; } }

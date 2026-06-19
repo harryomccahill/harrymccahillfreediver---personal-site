@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Harry McCahill — Fall calm, rise strong</title>
+<link rel="icon" type="image/svg+xml" href="assets/logo/crest-favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="assets/css/brand.css">
+<style>
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0; background: var(--mist); color: var(--slate);
+    font-family: var(--sans); font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+  }
+  :root { --gutter: clamp(24px, 6vw, 96px); }
+  img { display: block; }
+  a { color: inherit; }
+
+  /* The dive — background falls to Abyss and rises back to Mist */
+  .dive { background: linear-gradient(180deg,
+      #06141d 0%, #07191f 6%,
+      var(--mist) 6%, var(--mist) 100%); }
+
+  /* ============ NAV ============ */
+  .nav {
+    position: fixed; inset: 0 0 auto 0; z-index: 50;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 22px var(--gutter);
+    transition: background 480ms var(--ease), padding 480ms var(--ease), backdrop-filter 480ms var(--ease);
+  }
+  .nav.scrolled { background: rgba(6,20,29,0.82); backdrop-filter: blur(14px); padding: 14px var(--gutter); }
+  .nav__brand { display: flex; align-items: center; gap: 13px; text-decoration: none; }
+  .nav__brand .wm { font-size: clamp(17px, 1.35vw, 20px); }
+  .nav__links { display: flex; gap: clamp(18px, 2.6vw, 40px); align-items: center; }
+  .nav__links a {
+    font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase;
+    text-decoration: none; color: var(--mist); opacity: 0.82;
+    transition: opacity 320ms var(--ease);
+  }
+  .nav__links a:hover { opacity: 1; }
+  .nav__links a.cta {
+    border: 1px solid rgba(234,242,242,0.45); border-radius: 999px;
+    padding: 9px 18px;
+  }
+  @media (max-width: 720px) { .nav__links a:not(.cta) { display: none; } }
+
+  /* ============ DEPTH RAIL (dive computer) ============ */
+  .rail {
+    position: fixed; right: clamp(14px, 2.4vw, 34px); top: 50%; transform: translateY(-50%);
+    z-index: 40; display: flex; flex-direction: column; align-items: center; gap: 14px;
+    pointer-events: none;
+  }
+  .rail__readout {
+    font-family: var(--crest); font-size: 13px; letter-spacing: 0.18em;
+    color: var(--rail-ink, var(--slate));
+    writing-mode: vertical-rl; text-orientation: mixed;
+    transition: color 600ms var(--ease);
+  }
+  .rail__track { position: relative; width: 1px; height: clamp(160px, 30vh, 300px); background: color-mix(in oklab, var(--rail-ink, var(--slate)) 30%, transparent); }
+  .rail__dot {
+    position: absolute; left: 50%; top: 0; transform: translate(-50%, -50%);
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--tide);
+    box-shadow: 0 0 0 4px color-mix(in oklab, var(--tide) 18%, transparent);
+    transition: top 120ms linear;
+  }
+  @media (max-width: 880px) { .rail { display: none; } }
+
+  /* ============ HERO ============ */
+  .hero {
+    position: relative; min-height: 100svh;
+    display: flex; align-items: flex-end;
+    overflow: hidden; background: var(--abyss);
+  }
+  .hero__img {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    object-fit: cover; object-position: 50% 58%;
+    transform: scale(1.05); animation: heroDrift 26s var(--ease) forwards;
+  }
+  @keyframes heroDrift { to { transform: scale(1); } }
+  @media (prefers-reduced-motion: reduce) { .hero__img { animation: none; transform: none; } }
+  .hero__scrim {
+    position: absolute; inset: 0;
+    background:
+      linear-gradient(90deg, rgba(6,20,29,0.55) 0%, rgba(6,20,29,0.16) 28%, rgba(6,20,29,0) 50%),
+      linear-gradient(180deg, rgba(6,20,29,0.4) 0%, rgba(6,20,29,0) 16%, rgba(6,20,29,0) 52%, rgba(6,20,29,0.7) 100%);
+  }
+  .hero__inner { position: relative; z-index: 2; width: 100%; padding: 0 var(--gutter) clamp(46px, 7vw, 90px); }
+  .hero__eyebrow { margin-bottom: clamp(16px, 2vw, 22px); color: #eaf7f9; text-shadow: 0 1px 3px rgba(6,20,29,0.85), 0 2px 22px rgba(6,20,29,0.92); }
+  .hero h1 {
+    font-family: var(--serif); font-weight: 400; color: var(--mist);
+    font-size: clamp(40px, 5.4vw, 86px);
+    line-height: 0.98; letter-spacing: 0.01em; margin: 0;
+    text-shadow: 0 2px 36px rgba(6,20,29,0.42);
+  }
+  .hero h1 em { font-style: italic; color: var(--light); }
+  .hero__foot { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 28px; margin-top: clamp(22px, 3vw, 40px); }
+  .hero__oneliner {
+    font-family: var(--sans); font-weight: 300; color: var(--mist); opacity: 0.9;
+    font-size: clamp(13px, 1.05vw, 16px); letter-spacing: 0.04em;
+    max-width: 30ch; line-height: 1.6; text-shadow: 0 1px 18px rgba(6,20,29,0.7); margin: 0;
+  }
+  .hero__ctas { display: flex; gap: 12px; flex-wrap: wrap; }
+
+  /* ============ CHAPTERS ============ */
+  .chapter { position: relative; padding: clamp(80px, 12vw, 160px) var(--gutter); }
+  .chapter__mark {
+    display: flex; align-items: baseline; gap: 18px;
+    margin-bottom: clamp(36px, 5vw, 64px);
+  }
+  .chapter__depth {
+    font-family: var(--crest); font-size: clamp(13px, 1.1vw, 16px);
+    letter-spacing: 0.3em; color: var(--tide); white-space: nowrap;
+  }
+  .chapter__rule { flex: 1; height: 1px; background: color-mix(in oklab, currentColor 16%, transparent); }
+  .chapter h2 {
+    font-family: var(--serif); font-weight: 400;
+    font-size: clamp(32px, 3.6vw, 56px); line-height: 1.06;
+    letter-spacing: 0.01em; margin: 0 0 clamp(20px, 2.4vw, 30px); color: var(--deep);
+  }
+  .chapter h2 em { font-style: italic; color: var(--tide); }
+  .chapter p { font-size: clamp(15px, 1.12vw, 17px); line-height: 1.85; letter-spacing: 0.015em; font-weight: 300; margin: 0 0 1.3em; max-width: 58ch; text-wrap: pretty; }
+  .chapter p b { font-weight: 600; color: var(--deep); }
+
+  .two-col { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: clamp(40px, 6vw, 100px); align-items: center; }
+  @media (max-width: 880px) { .two-col { grid-template-columns: 1fr; } }
+
+  figure.photo { position: relative; margin: 0; }
+  figure.photo img { width: 100%; height: auto; border-radius: 4px; }
+  figure.photo .cap {
+    display: block; margin-top: 12px;
+    font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--slate); opacity: 0.7;
+  }
+
+  /* Story (surface) */
+  .story { background: var(--mist); color: var(--slate); }
+
+  /* Competitor (deepening) */
+  .competitor { background: var(--deep); color: rgba(234,242,242,0.84); }
+  .competitor .chapter__depth { color: var(--light); }
+  .competitor h2 { color: var(--mist); }
+  .competitor h2 em { color: var(--light); }
+  .competitor p b { color: var(--mist); }
+  .pb-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px;
+    background: rgba(234,242,242,0.16); border: 1px solid rgba(234,242,242,0.16);
+    margin-top: clamp(34px, 4vw, 52px);
+  }
+  .pb { background: var(--deep); padding: clamp(20px, 2.4vw, 34px) clamp(16px, 2vw, 28px); }
+  .pb .num { font-family: var(--serif); font-weight: 400; font-size: clamp(34px, 3.4vw, 56px); color: var(--mist); line-height: 1; }
+  .pb .num span { font-size: 0.5em; color: var(--light); margin-left: 2px; }
+  .pb .lbl { margin-top: 10px; font-size: 10.5px; letter-spacing: 0.24em; text-transform: uppercase; color: rgba(234,242,242,0.62); }
+  @media (max-width: 720px) { .pb-grid { grid-template-columns: repeat(2, 1fr); } }
+  .proof-line { margin-top: clamp(26px, 3vw, 38px); font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(234,242,242,0.55); }
+
+  /* Deepest point (Abyss, full-bleed) */
+  .deepest {
+    position: relative; min-height: 92svh; display: flex; align-items: flex-end; justify-content: flex-start;
+    overflow: hidden; background: var(--abyss); text-align: left;
+    padding-bottom: clamp(56px, 9vh, 110px);
+  }
+  .deepest__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 38%; opacity: 0.82; }
+  .deepest__scrim { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(6,20,29,0.5) 0%, rgba(6,20,29,0.1) 45%), linear-gradient(180deg, rgba(6,20,29,0.14) 0%, rgba(6,20,29,0.1) 40%, rgba(6,20,29,0.66) 100%); }
+  .deepest__inner { position: relative; z-index: 2; padding: 0 var(--gutter); }
+  .deepest .depth-label { font-family: var(--crest); font-size: 13px; letter-spacing: 0.34em; color: var(--light); margin-bottom: 26px; }
+  .deepest blockquote {
+    margin: 0; font-family: var(--serif); font-weight: 400; font-style: italic;
+    font-size: clamp(28px, 3.4vw, 52px); line-height: 1.25; color: var(--mist);
+    max-width: 22ch; text-shadow: 0 2px 30px rgba(6,20,29,0.6);
+  }
+  .deepest .attr { margin-top: 28px; font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(234,242,242,0.6); }
+  .deepest blockquote .bq-roman { font-style: normal; }
+  .deepest blockquote .bq-accent { color: var(--light); }
+
+  /* Coach (the ascent — light returns) */
+  .coach { background: linear-gradient(180deg, #0b2e42 0%, #155468 34%, #2c7a8c 72%, #5fa9b5 100%); color: rgba(234,242,242,0.88); }
+  .coach .chapter__depth { color: var(--light); }
+  .coach h2 { color: #f4fafa; }
+  .coach h2 em { color: #d7f0f2; }
+  .coach p b { color: #fff; }
+  .coach-points { list-style: none; margin: clamp(26px, 3vw, 40px) 0 0; padding: 0; display: grid; gap: 16px; max-width: 56ch; }
+  .coach-points li { display: flex; gap: 16px; align-items: baseline; font-size: clamp(14px, 1.05vw, 16px); line-height: 1.7; font-weight: 300; }
+  .coach-points li::before { content: ""; flex: none; width: 7px; height: 7px; border-radius: 50%; background: var(--light); transform: translateY(-1px); }
+  .coach .btn-row { display: flex; gap: 14px; flex-wrap: wrap; margin-top: clamp(30px, 3.6vw, 46px); }
+  /* Coach section on light ground (moved below the ascent) */
+  .story .coach-points li::before { background: var(--tide); }
+  .story .btn-row { display: flex; gap: 14px; flex-wrap: wrap; margin-top: clamp(30px, 3.6vw, 46px); }
+
+  /* Surface (contact — full light) */
+  .surface { background: var(--mist); color: var(--slate); text-align: center; padding: clamp(90px, 13vw, 170px) var(--gutter) clamp(70px, 9vw, 120px); }
+  .surface .depth-label { font-family: var(--crest); font-size: 13px; letter-spacing: 0.34em; color: var(--tide); margin-bottom: 30px; }
+  .surface h2 { font-family: var(--serif); font-weight: 400; font-size: clamp(38px, 4.6vw, 72px); line-height: 1.02; color: var(--deep); margin: 0 0 22px; }
+  .surface h2 em { font-style: italic; color: var(--tide); }
+  .surface p { font-size: clamp(15px, 1.1vw, 17px); font-weight: 300; line-height: 1.8; max-width: 46ch; margin: 0 auto 1.2em; }
+  .surface .btn-row { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; margin-top: 36px; }
+  .surface .socials { display: flex; gap: 28px; justify-content: center; margin-top: clamp(46px, 5vw, 64px); }
+  .surface .socials a { font-size: 11px; letter-spacing: 0.26em; text-transform: uppercase; text-decoration: none; color: var(--slate); opacity: 0.72; transition: opacity 320ms var(--ease), color 320ms var(--ease); }
+  .surface .socials a:hover { opacity: 1; color: var(--tide); }
+
+  /* ============ BUTTONS ============ */
+  .btn {
+    display: inline-block; text-decoration: none;
+    font-family: var(--sans); font-size: 11.5px; font-weight: 500;
+    letter-spacing: 0.24em; text-transform: uppercase;
+    padding: 15px 30px; border-radius: 999px; white-space: nowrap;
+    transition: background 320ms var(--ease), color 320ms var(--ease), border-color 320ms var(--ease), transform 320ms var(--ease);
+  }
+  .btn:hover { transform: translateY(-1px); }
+  .btn--light { background: var(--mist); color: var(--deep); }
+  .btn--light:hover { background: #fff; }
+  .btn--ghost { border: 1px solid rgba(234,242,242,0.5); color: var(--mist); }
+  .btn--ghost:hover { border-color: var(--mist); }
+  .btn--deep { background: var(--deep); color: var(--mist); }
+  .btn--deep:hover { background: #0c3247; }
+  .btn--tide-ghost { border: 1px solid color-mix(in oklab, var(--slate) 40%, transparent); color: var(--deep); }
+  .btn--tide-ghost:hover { border-color: var(--tide); color: var(--tide); }
+
+  /* ============ FOOTER ============ */
+  .footer { background: var(--abyss); color: rgba(234,242,242,0.7); padding: clamp(56px, 7vw, 90px) var(--gutter) 40px; }
+  .footer__grid { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 40px; align-items: flex-start; }
+  .footer__tag { font-family: var(--serif); font-style: italic; font-size: 17px; color: rgba(234,242,242,0.85); margin: 0; }
+  .footer__cols { display: flex; gap: clamp(36px, 5vw, 80px); flex-wrap: wrap; }
+  .footer__col h4 { font-size: 10.5px; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(234,242,242,0.5); margin: 0 0 14px; font-weight: 500; }
+  .footer__col a { display: block; font-size: 13.5px; font-weight: 300; text-decoration: none; color: rgba(234,242,242,0.82); margin-bottom: 9px; transition: color 320ms var(--ease); }
+  .footer__col a:hover { color: var(--light); }
+  .footer__base { margin-top: clamp(40px, 5vw, 60px); padding-top: 24px; border-top: 1px solid rgba(234,242,242,0.14); display: flex; flex-wrap: wrap; gap: 16px; justify-content: space-between; font-size: 11.5px; letter-spacing: 0.06em; color: rgba(234,242,242,0.45); }
+
+  /* ============ REVEALS ============ */
+  .reveal { opacity: 0; transform: translateY(26px); transition: opacity 900ms var(--ease), transform 900ms var(--ease); }
+  .reveal[data-d="1"] { transition-delay: 120ms; }
+  .reveal[data-d="2"] { transition-delay: 240ms; }
+  .reveal[data-d="3"] { transition-delay: 360ms; }
+  .reveal.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } }
+</style>
+</head>
+<body class="dive">
+
+<nav class="nav" id="nav">
+  <a class="nav__brand" href="index.html">
+    <svg class="crest on-dark" width="32" height="58" viewBox="0 0 24 44" aria-hidden="true">
+      <g class="sky">
+        <line x1="12" y1="3" x2="12.6" y2="8"></line>
+        <line x1="12.6" y1="8" x2="12" y2="11"></line>
+        <line x1="12" y1="11" x2="8" y2="15.6"></line>
+        <line x1="12" y1="11" x2="17.4" y2="16.6"></line>
+        <circle cx="12" cy="3" r="1.1"></circle>
+        <circle cx="12.6" cy="8" r="1"></circle>
+        <circle cx="12" cy="11" r="1.2"></circle>
+        <circle cx="8" cy="15.6" r="1"></circle>
+        <circle cx="17.4" cy="16.6" r="1.3"></circle>
+        <line class="stem" x1="12" y1="11" x2="12" y2="33"></line>
+        <line class="surface" x1="5.5" y1="33" x2="18.5" y2="33"></line>
+      </g>
+      <g class="sea">
+        <line class="tideline" x1="12" y1="33" x2="12" y2="39"></line>
+        <circle cx="12" cy="41" r="1.7"></circle>
+      </g>
+    </svg>
+    <span class="wordmark on-dark wm">Harry McCahill</span>
+  </a>
+  <div class="nav__links">
+    <a href="#story">Story</a>
+    <a href="records.html">Records</a>
+    <div class="nav__item has-drop">
+      <a href="coaching.html" class="nav__top">Coaching</a>
+      <div class="nav__drop">
+        <a href="coaching.html#clients">Clients</a>
+        <a href="coaching.html#courses">Courses</a>
+        <a href="coaching.html#calendar">Calendar</a>
+      </div>
+    </div>
+    <a href="media.html">Media</a>
+    <a href="blog.html">Journal</a>
+    <a href="sponsor.html" class="cta">Partner</a>
+  </div>
+</nav>
+
+<div class="rail" id="rail" aria-hidden="true">
+  <div class="rail__track"><div class="rail__dot" id="railDot"></div></div>
+  <div class="rail__readout" id="railReadout">0 M</div>
+</div>
+
+<header class="hero" data-screen-label="Hero">
+  <img class="hero__img" src="assets/photos-v2/cnf-relaxation.jpg" alt="A freediver hanging motionless at depth beneath the platform, suspended in blue">
+  <div class="hero__scrim"></div>
+  <div class="hero__inner">
+    <p class="eyebrow on-dark hero__eyebrow reveal in">Freediver · Coach · Athlete · Dominica</p>
+    <h1 class="reveal in" data-d="1">Fall calm,<br><em>rise strong.</em></h1>
+    <div class="hero__foot">
+      <p class="hero__oneliner reveal in" data-d="2">The UK's deepest no-fins freediver. 8th in the world. AIDA Master Instructor, based in Dominica.</p>
+      <div class="hero__ctas reveal in" data-d="3">
+        <a href="#coaching" class="btn btn--light">Train with me</a>
+        <a href="sponsor.html" class="btn btn--ghost">Partner with me</a>
+      </div>
+    </div>
+  </div>
+  <span class="credit">Photograph · Allie Reilly</span>
+</header>
+
+<section class="chapter story" id="story" data-screen-label="Story">
+  <div class="chapter__mark reveal">
+    <span class="chapter__depth">I · The surface</span>
+    <span class="chapter__rule"></span>
+  </div>
+  <div class="two-col">
+    <div>
+      <p class="eyebrow reveal" style="margin-bottom:18px;">On one breath</p>
+      <h2 class="reveal">Nothing had ever<br>felt as <em>natural.</em></h2>
+      <p class="reveal" data-d="1">Long before the deep, there was the river — a Winchester College First VIII oarsman at fifteen, a GB Rowing trialist. And before the ocean, the deep he loved was overhead: an astrophysics graduate whose first vast, silent place was the night sky.</p>
+      <p class="reveal" data-d="2">Then, locked down in Hawai'i during Covid, Harry took a breath and went underwater. That hobby became a calling: in 2022 he left the UK for <b>Dominica</b> — a volcanic island ringed by deep, clear water — and committed completely.</p>
+      <p class="reveal" data-d="3">The line in his crest falls from his own star sign through the surface and into the sea — <b>the two deeps joined by a single thread.</b></p>
+    </div>
+    <figure class="photo reveal" data-d="1">
+      <img src="assets/photos-v2/harry-breath-up.jpg" alt="Harry McCahill floating on his back at the surface, breathing up before a dive">
+      <span class="cap">The breath-up — where every dive is won</span>
+      <span class="credit">Allie Reilly</span>
+    </figure>
+  </div>
+</section>
+
+<section class="chapter competitor" id="competitor" data-screen-label="Competitor">
+  <div class="chapter__mark reveal">
+    <span class="chapter__depth">II · The descent</span>
+    <span class="chapter__rule"></span>
+  </div>
+  <div class="two-col">
+    <figure class="photo reveal">
+      <img src="assets/photos-v2/nofins-gliding.jpg" alt="Harry McCahill descending head-first beside the competition line with no fins">
+      <span class="cap">CNF · no fins, no propulsion — only the body</span>
+      <span class="credit">Allie Reilly</span>
+    </figure>
+    <div>
+      <p class="eyebrow on-dark reveal" style="margin-bottom:18px;">The competitor</p>
+      <h2 class="reveal">8th in the world,<br>in the <em>purest</em> discipline.</h2>
+      <p class="reveal" data-d="1">Competing only since 2024, Harry is the <b>deepest no-fins diver in Britain</b>, second-deepest in British history, and holder of three national records — in Constant Weight No Fins, where a diver descends and returns on a single breath using nothing but their own body.</p>
+      <p class="reveal" data-d="2">In 2026 he earned a <b>wild card to the AIDA Depth World Championships</b> in Limassol, Cyprus.</p>
+    </div>
+  </div>
+  <div class="pb-grid reveal" data-d="1">
+    <div class="pb"><div class="num">91<span>m</span></div><div class="lbl">CWT · Constant Weight</div></div>
+    <div class="pb"><div class="num">90<span>m</span></div><div class="lbl">FIM · Free Immersion</div></div>
+    <div class="pb"><div class="num">85<span>m</span></div><div class="lbl">CWTB · Bi-fins</div></div>
+    <div class="pb"><div class="num">80<span>m</span></div><div class="lbl">CNF · No Fins</div></div>
+  </div>
+  <p class="proof-line reveal" data-d="2">8th in the world · CNF 2025 — 3 national records — World Championships wild card 2026</p>
+</section>
+
+<section class="deepest" data-screen-label="Deepest point">
+  <img class="deepest__img" src="assets/photos-v2/wide-glide-cnf.jpg" alt="A no-fins freediver gliding weightless, arms spread, in a column of light from the surface">
+  <div class="deepest__scrim"></div>
+  <div class="deepest__inner">
+    <p class="depth-label reveal">III · The deepest point</p>
+    <blockquote class="reveal" data-d="1"><span class="bq-roman">Surrender the descent;</span><br>earn the <em class="bq-accent">ascent.</em></blockquote>
+    <p class="attr reveal" data-d="2">You let go to sink — then find the will to come back</p>
+  </div>
+  <span class="credit">Photograph · Allie Reilly</span>
+</section>
+
+<section class="chapter coach" data-screen-label="The ascent">
+  <div class="chapter__mark reveal">
+    <span class="chapter__depth">IV · The ascent</span>
+    <span class="chapter__rule"></span>
+  </div>
+  <div class="two-col">
+    <div>
+      <p class="eyebrow on-dark reveal" style="margin-bottom:18px;">The mindset</p>
+      <h2 class="reveal">The hardest metres<br>are the <em>last.</em></h2>
+      <p class="reveal" data-d="1">The ascent is where a dive is decided. The urge to breathe arrives, the body begs to rush — and the discipline is to stay slow, stay soft, and trust the work already done.</p>
+      <p class="reveal" data-d="2">You don't fight the pressure. You meet it — one relaxed pull at a time — and let the surface come to you.</p>
+    </div>
+    <figure class="photo reveal" data-d="1">
+      <img src="assets/photos-v2/cnf-relaxation.jpg" alt="A freediver ascending the line toward the bright surface, relaxed and weightless">
+      <span class="cap" style="color:rgba(234,242,242,0.78)">The way up — calm under rising pressure</span>
+    </figure>
+  </div>
+</section>
+
+<section class="chapter story" id="coaching" data-screen-label="Coaching">
+  <div class="chapter__mark reveal">
+    <span class="chapter__depth">V · The coach</span>
+    <span class="chapter__rule"></span>
+  </div>
+  <div class="two-col">
+    <figure class="photo reveal" data-d="1">
+      <img src="assets/photos-v2/harry-be-kk.jpg" alt="Harry McCahill in a wetsuit on the shore of Soufrière Bay, Dominica">
+      <span class="cap">Soufrière Bay · Dominica</span>
+      <span class="credit">Allie Reilly</span>
+    </figure>
+    <div>
+      <p class="eyebrow reveal" style="margin-bottom:18px;">The coach</p>
+      <h2 class="reveal">Calm is <em>taught</em>,<br>not forced.</h2>
+      <p class="reveal" data-d="1">As an <b>AIDA Master Instructor</b>, Harry has certified over 100 students — from first breath-holds to competition depth. The approach is the same calm that defines his own diving: relaxation, efficient technique, and nervous-system regulation. Not pushing.</p>
+      <ul class="coach-points reveal" data-d="2">
+        <li>AIDA courses, beginner to instructor — year-round in Dominica</li>
+        <li>Depth coaching &amp; competition preparation</li>
+        <li>One of the world's premier depth-training locations: deep, warm, still water</li>
+      </ul>
+      <div class="btn-row reveal" data-d="3">
+        <a href="mailto:harry.mccahill@gmail.com" class="btn btn--deep">Start your training</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="surface" data-screen-label="Surface / Contact">
+  <p class="depth-label reveal">VI · The surface again</p>
+  <h2 class="reveal" data-d="1">Rise <em>strong.</em></h2>
+  <p class="reveal" data-d="2">Train with Harry in Dominica, partner with a rising GB athlete, or just follow the story — one breath at a time.</p>
+  <div class="btn-row reveal" data-d="3">
+    <a href="mailto:harry.mccahill@gmail.com" class="btn btn--deep">Get in touch</a>
+    <a href="sponsor.html" class="btn btn--tide-ghost">Partnership one-pager</a>
+  </div>
+  <div class="socials reveal" data-d="3">
+    <a href="https://instagram.com/harrymccahill" target="_blank" rel="noopener">Instagram</a>
+    <a href="https://www.tiktok.com/@harryomccahill" target="_blank" rel="noopener">TikTok</a>
+    <a href="https://www.youtube.com/@harrymccahillfreediver" target="_blank" rel="noopener">YouTube</a>
+    <a href="https://www.facebook.com/harrymccahillfreediver" target="_blank" rel="noopener">Facebook</a>
+  </div>
+</section>
+
+<footer class="footer" data-screen-label="Footer">
+  <div class="footer__grid">
+    <div>
+      <div style="display:flex;align-items:center;gap:14px;margin-bottom:18px;">
+        <svg class="crest on-dark" width="22" height="40" viewBox="0 0 24 44" aria-hidden="true">
+          <g class="sky">
+            <line x1="12" y1="3" x2="12.6" y2="8"></line>
+            <line x1="12.6" y1="8" x2="12" y2="11"></line>
+            <line x1="12" y1="11" x2="8" y2="15.6"></line>
+            <line x1="12" y1="11" x2="17.4" y2="16.6"></line>
+            <circle cx="12" cy="3" r="1.1"></circle>
+            <circle cx="12.6" cy="8" r="1"></circle>
+            <circle cx="12" cy="11" r="1.2"></circle>
+            <circle cx="8" cy="15.6" r="1"></circle>
+            <circle cx="17.4" cy="16.6" r="1.3"></circle>
+            <line class="stem" x1="12" y1="11" x2="12" y2="33"></line>
+            <line class="surface" x1="5.5" y1="33" x2="18.5" y2="33"></line>
+          </g>
+          <g class="sea">
+            <line class="tideline" x1="12" y1="33" x2="12" y2="39"></line>
+            <circle cx="12" cy="41" r="1.7"></circle>
+          </g>
+        </svg>
+        <span class="wordmark on-dark" style="font-size:17px;">Harry McCahill</span>
+      </div>
+      <p class="footer__tag">Fall calm, rise strong</p>
+    </div>
+    <div class="footer__cols">
+      <div class="footer__col">
+        <h4>Site</h4>
+        <a href="#story">Story</a>
+        <a href="records.html">Records</a>
+        <a href="coaching.html">Coaching</a>
+        <a href="media.html">Media</a>
+        <a href="blog.html">Journal</a>
+        <a href="sponsor.html">Partnership</a>
+      </div>
+      <div class="footer__col">
+        <h4>Follow</h4>
+        <a href="https://instagram.com/harrymccahill" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://www.tiktok.com/@harryomccahill" target="_blank" rel="noopener">TikTok</a>
+        <a href="https://www.youtube.com/@harrymccahillfreediver" target="_blank" rel="noopener">YouTube</a>
+        <a href="https://www.facebook.com/harrymccahillfreediver" target="_blank" rel="noopener">Facebook</a>
+      </div>
+      <div class="footer__col">
+        <h4>Elsewhere</h4>
+        <a href="https://blueelementfreediving.com" target="_blank" rel="noopener">Blue Element Freediving</a>
+        <a href="brand-kit.html">Brand kit</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer__base">
+    <span>© 2026 Harry McCahill · Dominica</span>
+    <span>Photography · Allie Reilly</span>
+  </div>
+</footer>
+
+<script>
+  // Nav background on scroll
+  const nav = document.getElementById('nav');
+  addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 40), { passive: true });
+
+  // Reveal on scroll (position-based — robust where IntersectionObserver is throttled)
+  const pending = [...document.querySelectorAll('.reveal:not(.in)')];
+  function checkReveals() {
+    const vh = innerHeight;
+    for (let i = pending.length - 1; i >= 0; i--) {
+      const r = pending[i].getBoundingClientRect();
+      if (r.top < vh * 0.88 && r.bottom > 0) {
+        pending[i].classList.add('in');
+        pending.splice(i, 1);
+      }
+    }
+  }
+  addEventListener('scroll', checkReveals, { passive: true });
+  addEventListener('resize', checkReveals);
+  checkReveals();
+
+  // Depth rail — dive computer tracking the scroll: 0m at story, -80m at deepest point, 0m at surface
+  const railDot = document.getElementById('railDot');
+  const railReadout = document.getElementById('railReadout');
+  const rail = document.getElementById('rail');
+  const deepestEl = document.querySelector('.deepest');
+  const surfaceEl = document.querySelector('section.surface');
+  function updateRail() {
+    const vh = innerHeight;
+    const deepCenter = deepestEl.offsetTop + deepestEl.offsetHeight / 2 - vh / 2;
+    const surfTop = surfaceEl.offsetTop + surfaceEl.offsetHeight / 2 - vh / 2;
+    const y = scrollY;
+    let t; // 0 = surface, 1 = deepest
+    if (y <= deepCenter) t = Math.max(0, y / deepCenter);
+    else t = Math.max(0, 1 - (y - deepCenter) / Math.max(1, surfTop - deepCenter));
+    const depth = Math.round(t * 80);
+    railDot.style.top = (t * 100) + '%';
+    railReadout.textContent = '−' + depth + ' M';
+    // ink: dark text on light sections, light on dark
+    const onDark = depth > 18;
+    rail.style.setProperty('--rail-ink', onDark ? 'rgba(234,242,242,0.85)' : 'var(--slate)');
+  }
+  addEventListener('scroll', updateRail, { passive: true });
+  addEventListener('resize', updateRail);
+  updateRail();
+</script>
+
+</body>
+</html>
