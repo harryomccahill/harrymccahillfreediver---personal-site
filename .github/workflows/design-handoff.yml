@@ -11,9 +11,24 @@ permissions:
   contents: write
   pull-requests: write
   issues: write
+  id-token: write   # required: claude-code-action mints its GitHub token via OIDC
+  actions: write    # required: the redispatch job calls `gh workflow run`
 
 jobs:
+  # claude-code-action does not support the `push` event, so a push to a handoff
+  # bundle simply re-triggers this same workflow via workflow_dispatch (a supported
+  # event), where the implement-handoff job below does the real work.
+  redispatch:
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Re-run as workflow_dispatch
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run design-handoff.yml --ref main
+
   implement-handoff:
+    if: github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
@@ -33,7 +48,7 @@ jobs:
                (exact colors, type, spacing, layout, interactions, state).
             2. The `.html` files in that folder are DESIGN REFERENCES only — do not
                ship them. Recreate the design in this codebase using its existing
-               framework, components, and patterns.
+               patterns (this is a static HTML/CSS site with small vanilla scripts).
             3. Use the specialised subagents in `.claude/agents/` where relevant.
             4. Match the spec pixel-for-pixel (it is high-fidelity unless the README
                says otherwise).
