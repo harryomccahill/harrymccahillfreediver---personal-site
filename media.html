@@ -92,6 +92,25 @@
   .film:hover .film__play { background: rgba(234,242,242,0.12); border-color: var(--mist); }
   .film__play svg { width: 38%; height: 38%; margin-left: 8%; fill: var(--mist); }
 
+  /* ============ FEATURED FILM ============ */
+  .filmfeature { display: grid; grid-template-columns: auto 1fr; gap: clamp(28px, 5vw, 64px); align-items: center; background: var(--deep); border: 1px solid rgba(124,196,206,0.18); border-radius: 8px; padding: clamp(22px, 3vw, 44px); margin-bottom: 14px; }
+  .filmfeature__player { position: relative; width: clamp(240px, 32vw, 360px); aspect-ratio: 9 / 16; border-radius: 6px; overflow: hidden; background: #08222f; box-shadow: var(--shadow-deep); }
+  .filmfeature__player video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+  .filmfeature__label { font-size: 11px; letter-spacing: 0.26em; text-transform: uppercase; color: var(--light); }
+  .filmfeature__title { font-family: var(--serif); font-weight: 400; font-size: clamp(28px, 3.4vw, 48px); line-height: 1.04; color: var(--mist); margin: 16px 0 0; letter-spacing: 0.01em; }
+  .filmfeature__title em { font-style: italic; color: var(--light); }
+  .filmfeature__desc { font-size: clamp(14px, 1.05vw, 16px); font-weight: 300; line-height: 1.7; color: rgba(234,242,242,0.82); max-width: 48ch; margin: 20px 0 0; }
+  .filmfeature__stats { display: flex; gap: clamp(22px, 3.4vw, 48px); margin-top: clamp(24px, 2.8vw, 34px); flex-wrap: wrap; }
+  .filmfeature__stat .n { font-family: var(--serif); font-weight: 400; font-size: clamp(26px, 2.6vw, 36px); line-height: 1; color: var(--mist); }
+  .filmfeature__stat .n span { font-size: 0.5em; color: var(--light); margin-left: 1px; }
+  .filmfeature__stat .l { font-size: 10.5px; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(234,242,242,0.6); margin-top: 9px; }
+  @media (max-width: 760px) {
+    .filmfeature { grid-template-columns: 1fr; justify-items: center; text-align: center; }
+    .filmfeature__player { width: min(320px, 78vw); }
+    .filmfeature__desc { margin-left: auto; margin-right: auto; }
+    .filmfeature__stats { justify-content: center; }
+  }
+
   /* ============ CHANNELS ============ */
   .channels { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1px; background: rgba(124,196,206,0.18); border: 1px solid rgba(124,196,206,0.18); }
   .channel { background: var(--abyss); padding: clamp(26px, 3vw, 40px) clamp(20px, 2.4vw, 32px); text-decoration: none; display: flex; flex-direction: column; gap: 8px; transition: background 420ms var(--ease); }
@@ -212,6 +231,25 @@
   <div class="mark reveal">
     <span class="mark__depth">II · Film</span>
     <span class="mark__rule"></span>
+  </div>
+  <div class="filmfeature reveal" data-d="1" data-screen-label="Featured film">
+    <div class="filmfeature__player">
+      <video controls playsinline preload="metadata" poster="assets/videos/harry-cnf-80m-poster.jpg">
+        <source src="assets/videos/harry-cnf-80m.webm" type="video/webm">
+        <source src="assets/videos/harry-cnf-80m.mp4" type="video/mp4">
+        Your browser doesn't support embedded video. <a href="assets/videos/harry-cnf-80m.mp4">Download the film</a>.
+      </video>
+    </div>
+    <div class="filmfeature__meta">
+      <p class="filmfeature__label">Featured film · the dive</p>
+      <h3 class="filmfeature__title">Eighty metres,<br><em>no fins.</em></h3>
+      <p class="filmfeature__desc">Constant Weight No Fins — no propulsion but the body, nothing to pull on the way down. The descent and return on a single breath: relaxed, silent, and given the white card. Harry's deepest no-fins competition dive.</p>
+      <div class="filmfeature__stats">
+        <div class="filmfeature__stat"><div class="n">80<span>m</span></div><div class="l">Depth</div></div>
+        <div class="filmfeature__stat"><div class="n">CNF</div><div class="l">No fins</div></div>
+        <div class="filmfeature__stat"><div class="n">White</div><div class="l">Card · clean</div></div>
+      </div>
+    </div>
   </div>
   <a class="film reveal" data-d="1" href="https://www.youtube.com/@harrymccahillfreediver" target="_blank" rel="noopener">
     <img src="assets/photos-v2/cnf-descent-carribean.jpg" alt="Underwater footage still — a no-fins descent into the Caribbean blue">
