@@ -25,10 +25,9 @@
     position: fixed; inset: 0 0 auto 0; z-index: 50;
     display: flex; align-items: center; justify-content: space-between;
     padding: 22px var(--gutter);
-    background: rgba(6,20,29,0.82); backdrop-filter: blur(14px);
-    transition: background 480ms var(--ease), padding 480ms var(--ease);
+    transition: background 480ms var(--ease), padding 480ms var(--ease), backdrop-filter 480ms var(--ease);
   }
-  .nav.scrolled { padding: 14px var(--gutter); }
+  .nav.scrolled { background: rgba(6,20,29,0.82); backdrop-filter: blur(14px); padding: 14px var(--gutter); }
   .nav__brand { display: flex; align-items: center; gap: 13px; text-decoration: none; }
   .nav__brand .wm { font-size: clamp(17px, 1.35vw, 20px); }
   .nav__links { display: flex; gap: clamp(18px, 2.6vw, 40px); align-items: center; }
@@ -150,7 +149,6 @@
   .rankcard__live { display: inline-flex; align-items: center; gap: 8px; font-size: 10.5px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--light); }
   .rankcard__live .dot { width: 7px; height: 7px; border-radius: 999px; background: #46d39a; animation: rankPulse 2.8s var(--ease) infinite; }
   @keyframes rankPulse { 0% { box-shadow: 0 0 0 0 rgba(70,211,154,0.45); } 70% { box-shadow: 0 0 0 8px rgba(70,211,154,0); } 100% { box-shadow: 0 0 0 0 rgba(70,211,154,0); } }
-  @media (prefers-reduced-motion: reduce) { .rankcard__live .dot { animation: none; } }
   .rankcard__srcname { font-size: 12.5px; font-weight: 300; letter-spacing: 0.03em; color: rgba(234,242,242,0.72); }
   .rankcard__link { font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; text-decoration: none; color: var(--light); border: 1px solid color-mix(in oklab, var(--light) 42%, transparent); border-radius: 999px; padding: 11px 22px; white-space: nowrap; transition: background 320ms var(--ease), color 320ms var(--ease), transform 320ms var(--ease); }
   .rankcard__link:hover { background: var(--light); color: var(--deep); transform: translateY(-1px); }
@@ -283,9 +281,11 @@
     <div class="nav__item has-drop">
       <a href="coaching.html" class="nav__top">Coaching</a>
       <div class="nav__drop">
-        <a href="coaching.html#clients">Clients</a>
         <a href="coaching.html#courses">Courses</a>
+        <a href="coaching.html#oneonone">1:1 Coaching</a>
         <a href="coaching.html#calendar">Calendar</a>
+        <a href="coaching.html#clients">Clients</a>
+        <a href="coaching.html#referrals">Testimonials</a>
       </div>
     </div>
     <a href="media.html">Media</a>

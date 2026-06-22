@@ -25,10 +25,9 @@
     position: fixed; inset: 0 0 auto 0; z-index: 50;
     display: flex; align-items: center; justify-content: space-between;
     padding: 22px var(--gutter);
-    background: rgba(6,20,29,0.82); backdrop-filter: blur(14px);
-    transition: background 480ms var(--ease), padding 480ms var(--ease);
+    transition: background 480ms var(--ease), padding 480ms var(--ease), backdrop-filter 480ms var(--ease);
   }
-  .nav.scrolled { padding: 14px var(--gutter); }
+  .nav.scrolled { background: rgba(6,20,29,0.82); backdrop-filter: blur(14px); padding: 14px var(--gutter); }
   .nav__brand { display: flex; align-items: center; gap: 13px; text-decoration: none; }
   .nav__brand .wm { font-size: clamp(17px, 1.35vw, 20px); }
   .nav__links { display: flex; gap: clamp(18px, 2.6vw, 40px); align-items: center; }
@@ -188,9 +187,11 @@
     <div class="nav__item has-drop">
       <a href="coaching.html" class="nav__top">Coaching</a>
       <div class="nav__drop">
-        <a href="coaching.html#clients">Clients</a>
         <a href="coaching.html#courses">Courses</a>
+        <a href="coaching.html#oneonone">1:1 Coaching</a>
         <a href="coaching.html#calendar">Calendar</a>
+        <a href="coaching.html#clients">Clients</a>
+        <a href="coaching.html#referrals">Testimonials</a>
       </div>
     </div>
     <a href="media.html" aria-current="page">Media</a>

@@ -138,6 +138,9 @@
 
   /* Story (surface) */
   .story { background: var(--mist); color: var(--slate); }
+  .story__quote { margin: clamp(24px,2.8vw,34px) 0 0; font-family: var(--serif); font-style: italic; font-weight: 400; font-size: clamp(20px,1.8vw,27px); line-height: 1.4; color: var(--deep); }
+  .story__quote .qm { font-style: normal; color: var(--tide); margin-right: 4px; }
+  .story__cite { display: block; margin-top: 14px; font-family: var(--sans); font-style: normal; font-size: 11px; letter-spacing: 0.26em; text-transform: uppercase; color: var(--tide); }
 
   /* Competitor (deepening) */
   .competitor { background: var(--deep); color: rgba(234,242,242,0.84); }
@@ -145,6 +148,9 @@
   .competitor h2 { color: var(--mist); }
   .competitor h2 em { color: var(--light); }
   .competitor p b { color: var(--mist); }
+  .deep-quote { margin: clamp(28px,3.2vw,40px) 0 0; font-family: var(--serif); font-style: italic; font-weight: 400; font-size: clamp(19px,1.7vw,26px); line-height: 1.42; color: var(--mist); max-width: 52ch; }
+  .deep-quote .qm { font-style: normal; color: var(--light); margin-right: 4px; }
+  .deep-quote .cite { display: block; margin-top: 14px; font-family: var(--sans); font-style: normal; font-size: 11px; letter-spacing: 0.26em; text-transform: uppercase; color: var(--light); }
   .pb-grid {
     display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px;
     background: rgba(234,242,242,0.16); border: 1px solid rgba(234,242,242,0.16);
@@ -175,6 +181,12 @@
   .deepest .attr { margin-top: 28px; font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(234,242,242,0.6); }
   .deepest blockquote .bq-roman { font-style: normal; }
   .deepest blockquote .bq-accent { color: var(--light); }
+  .deepest .eyebrow { margin-bottom: 16px; }
+  .deepest__h2 { font-family: var(--serif); font-weight: 400; font-size: clamp(30px,4vw,56px); line-height: 1.06; letter-spacing: 0.01em; color: var(--mist); margin: 0 0 clamp(18px,2vw,26px); text-shadow: 0 2px 30px rgba(6,20,29,0.6); }
+  .deepest__h2 em { font-style: italic; color: var(--light); }
+  .deepest__p { font-size: clamp(15px,1.12vw,17px); line-height: 1.85; font-weight: 300; color: rgba(234,242,242,0.88); max-width: 54ch; margin: 0 0 1.2em; text-wrap: pretty; text-shadow: 0 1px 14px rgba(6,20,29,0.55); }
+  .deepest__p:last-of-type { margin-bottom: 0; }
+  .deepest__p b { font-weight: 600; color: var(--mist); }
 
   /* Coach (the ascent — light returns) */
   .coach { background: linear-gradient(180deg, #0b2e42 0%, #155468 34%, #2c7a8c 72%, #5fa9b5 100%); color: rgba(234,242,242,0.88); }
@@ -269,9 +281,11 @@
     <div class="nav__item has-drop">
       <a href="coaching.html" class="nav__top">Coaching</a>
       <div class="nav__drop">
-        <a href="coaching.html#clients">Clients</a>
         <a href="coaching.html#courses">Courses</a>
+        <a href="coaching.html#oneonone">1:1 Coaching</a>
         <a href="coaching.html#calendar">Calendar</a>
+        <a href="coaching.html#clients">Clients</a>
+        <a href="coaching.html#referrals">Testimonials</a>
       </div>
     </div>
     <a href="media.html">Media</a>
@@ -310,15 +324,14 @@
   <div class="two-col">
     <div>
       <p class="eyebrow reveal" style="margin-bottom:18px;">On one breath</p>
-      <h2 class="reveal">Nothing had ever<br>felt as <em>natural.</em></h2>
-      <p class="reveal" data-d="1">Long before the deep, there was the river — a Winchester College First VIII oarsman at fifteen, a GB Rowing trialist. And before the ocean, the deep he loved was overhead: an astrophysics graduate whose first vast, silent place was the night sky.</p>
-      <p class="reveal" data-d="2">Then, locked down in Hawai'i during Covid, Harry took a breath and went underwater. That hobby became a calling: in 2022 he left the UK for <b>Dominica</b> — a volcanic island ringed by deep, clear water — and committed completely.</p>
-      <p class="reveal" data-d="3">The line in his crest falls from his own star sign through the surface and into the sea — <b>the two deeps joined by a single thread.</b></p>
+      <h2 class="reveal">About <em>Harry.</em></h2>
+      <p class="reveal" data-d="1">Long before the deep, there was the river — a Winchester College First VIII oarsman at fifteen, a <b>GB Rowing trialist</b>. And before the ocean, the deep he loved was overhead: an <b>astrophysics undergraduate</b> whose first vast, silent place was the night sky.</p>
+      <p class="reveal" data-d="2">Then, locked down in Hawai'i during Covid, Harry took a breath and went underwater. That hobby became a calling. Back in the UK in 2020, a friend brought him to a depth camp in the cenotes of the Yucatán; those days with <b>Johnny Sunnex</b> left an indelible mark. By 2022 he was on his way to <b>Dominica</b> — a volcanic island ringed by deep, clear water — and committed completely.</p>
+      <blockquote class="story__quote reveal" data-d="3"><span class="qm" aria-hidden="true">“</span>In the early days it was just about getting in the water with friends to escape quarantine, but as I followed the wet breadcrumb trail — it kept giving back.”<span class="story__cite">— Harry McCahill</span></blockquote>
     </div>
     <figure class="photo reveal" data-d="1">
-      <img src="assets/photos-v2/harry-breath-up.jpg" alt="Harry McCahill floating on his back at the surface, breathing up before a dive">
-      <span class="cap">The breath-up — where every dive is won</span>
-      <span class="credit">Allie Reilly</span>
+      <img src="assets/photos-v2/harry-hawaii-wreck.jpg" alt="Harry McCahill freediving down toward a shipwreck in the deep blue off Hawai'i">
+      <span class="cap">The early days, diving the wrecks of Hawai'i with Will Melville</span>
     </figure>
   </div>
 </section>
@@ -330,24 +343,17 @@
   </div>
   <div class="two-col">
     <figure class="photo reveal">
-      <img src="assets/photos-v2/nofins-gliding.jpg" alt="Harry McCahill descending head-first beside the competition line with no fins">
-      <span class="cap">CNF · no fins, no propulsion — only the body</span>
-      <span class="credit">Allie Reilly</span>
+      <img src="assets/photos-v2/cenote-ucil-yucatan.jpg" alt="Cenote Ucil — a sunlit cavern pool in the Yucatán, Mexico, with wooden steps down to clear blue water">
+      <span class="cap">Exploring Ucil — the heart of the Yucatán</span>
     </figure>
     <div>
-      <p class="eyebrow on-dark reveal" style="margin-bottom:18px;">The competitor</p>
-      <h2 class="reveal">8th in the world,<br>in the <em>purest</em> discipline.</h2>
-      <p class="reveal" data-d="1">Competing only since 2024, Harry is the <b>deepest no-fins diver in Britain</b>, second-deepest in British history, and holder of three national records — in Constant Weight No Fins, where a diver descends and returns on a single breath using nothing but their own body.</p>
-      <p class="reveal" data-d="2">In 2026 he earned a <b>wild card to the AIDA Depth World Championships</b> in Limassol, Cyprus.</p>
+      <p class="eyebrow on-dark reveal" style="margin-bottom:18px;">Exploration</p>
+      <h2 class="reveal">New water,<br>new <em>depths.</em></h2>
+      <p class="reveal" data-d="1">Before the competition line, the pull was exploration. The <b>cenotes of the Yucatán</b>, <b>Dean's Blue Hole</b> of the Bahamas, the shores of <b>South Africa</b> and <b>Cornwall</b> — walls and caverns and open blue, each new water was novel; the practice wasn't the centrepiece yet.</p>
+      <p class="reveal" data-d="2">Every new place opens a quieter one. With no sound, no weight and nowhere to be, the descent turns inward — the deepest water Harry knows is the <b>stillness of his own mind</b>, somewhere only a held breath can reach.</p>
+      <blockquote class="deep-quote reveal" data-d="2"><span class="qm" aria-hidden="true">“</span>Adventure drives me — I love to see new places, have new experiences, meet new people. But what I couldn't know was the adventure freediving would take me on inward. That is the real gift.”<span class="cite">— Harry McCahill</span></blockquote>
     </div>
   </div>
-  <div class="pb-grid reveal" data-d="1">
-    <div class="pb"><div class="num">91<span>m</span></div><div class="lbl">CWT · Constant Weight</div></div>
-    <div class="pb"><div class="num">90<span>m</span></div><div class="lbl">FIM · Free Immersion</div></div>
-    <div class="pb"><div class="num">85<span>m</span></div><div class="lbl">CWTB · Bi-fins</div></div>
-    <div class="pb"><div class="num">80<span>m</span></div><div class="lbl">CNF · No Fins</div></div>
-  </div>
-  <p class="proof-line reveal" data-d="2">8th in the world · CNF 2025 — 3 national records — World Championships wild card 2026</p>
 </section>
 
 <section class="deepest" data-screen-label="Deepest point">
@@ -355,8 +361,10 @@
   <div class="deepest__scrim"></div>
   <div class="deepest__inner">
     <p class="depth-label reveal">III · The deepest point</p>
-    <blockquote class="reveal" data-d="1"><span class="bq-roman">Surrender the descent;</span><br>earn the <em class="bq-accent">ascent.</em></blockquote>
-    <p class="attr reveal" data-d="2">You let go to sink — then find the will to come back</p>
+    <p class="eyebrow on-dark reveal">The competitor</p>
+    <h2 class="deepest__h2 reveal" data-d="1">8th in the world,<br>in the <em>purest</em> discipline.</h2>
+    <p class="deepest__p reveal" data-d="1"><b>Hobby becomes devotion.</b> Competing only since 2024, Harry is the <b>deepest no-fins diver in Britain</b>, second-deepest in British history, and holder of <b>three national records</b> — in Constant Weight No Fins, where a diver descends and returns on a single breath using nothing but their own body.</p>
+    <p class="deepest__p reveal" data-d="2">In 2026 he earned a <b>wild card to the AIDA Depth World Championships</b> in Limassol, Cyprus.</p>
   </div>
   <span class="credit">Photograph · Allie Reilly</span>
 </section>
@@ -370,12 +378,13 @@
     <div>
       <p class="eyebrow on-dark reveal" style="margin-bottom:18px;">The mindset</p>
       <h2 class="reveal">The hardest metres<br>are the <em>last.</em></h2>
-      <p class="reveal" data-d="1">The ascent is where a dive is decided. The urge to breathe arrives, the body begs to rush — and the discipline is to stay slow, stay soft, and trust the work already done.</p>
-      <p class="reveal" data-d="2">You don't fight the pressure. You meet it — one relaxed pull at a time — and let the surface come to you.</p>
+      <p class="reveal" data-d="1">The ascent is where a dive is decided. The urge to breathe arrives, the body begs to rush — and the discipline is to <b>stay slow, stay soft</b>, and trust the work already done.</p>
+      <p class="reveal" data-d="2">You don't fight the pressure. You meet it — <b>one relaxed pull at a time</b> — and let the surface come to you.</p>
+      <blockquote class="deep-quote reveal" data-d="2"><span class="qm" aria-hidden="true">“</span>I have learned more about the power of positive self-talk in these metres than in all the years of my life.”<span class="cite">— Harry McCahill</span></blockquote>
     </div>
     <figure class="photo reveal" data-d="1">
-      <img src="assets/photos-v2/cnf-relaxation.jpg" alt="A freediver ascending the line toward the bright surface, relaxed and weightless">
-      <span class="cap" style="color:rgba(234,242,242,0.78)">The way up — calm under rising pressure</span>
+      <img src="assets/photos-v2/ascent-line-deep.jpg" alt="Freedivers rising up the line from the deep at Dean's Blue Hole, Bahamas, during Vertical Blue 2025">
+      <span class="cap" style="color:rgba(234,242,242,0.78)">Rising up from Dean's Blue Hole, Bahamas at Vertical Blue 2025</span>
     </figure>
   </div>
 </section>
@@ -394,7 +403,7 @@
     <div>
       <p class="eyebrow reveal" style="margin-bottom:18px;">The coach</p>
       <h2 class="reveal">Calm is <em>taught</em>,<br>not forced.</h2>
-      <p class="reveal" data-d="1">As an <b>AIDA Master Instructor</b>, Harry has certified over 100 students — from first breath-holds to competition depth. The approach is the same calm that defines his own diving: relaxation, efficient technique, and nervous-system regulation. Not pushing.</p>
+      <p class="reveal" data-d="1">As an <b>AIDA Master Instructor</b>, Harry has certified <b>over 100 students</b> — from first breath-holds to competition depth. The approach is the same calm that defines his own diving: relaxation, efficient technique, and nervous-system regulation. Not pushing.</p>
       <ul class="coach-points reveal" data-d="2">
         <li>AIDA courses, beginner to instructor — year-round in Dominica</li>
         <li>Depth coaching &amp; competition preparation</li>
