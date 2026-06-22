@@ -26,10 +26,10 @@ Target queries: **"Harry McCahill"**, **"freediving instructor"**, **"ranked fre
 - **robots.txt** (allows Google + AI engines: GPTBot, ClaudeBot, PerplexityBot, Google-Extended, Applebot-Extended, CCBot) + **sitemap.xml** (6 indexable pages) + **llms.txt** (AI entity file).
 - `brand-kit.html` set to `noindex` so it doesn't compete for brand queries.
 
-## ⚠️ Action needed from Harry (factual — I did NOT guess these)
-1. **Student count conflict:** homepage says "over 100" students; coaching says "250+". I published the **conservative "over 100"** in schema/llms.txt. Confirm the real number and align both pages.
-2. **"Deepest" vs "second-deepest":** pages say both "deepest no-fins in Britain" and "second-deepest in British history". I used the reconciled framing **"current British record holder; second-deepest in British history"** (i.e. current #1, all-time #2). Confirm this is accurate.
-3. **AEO parse risk:** records.html's charts are JS-injected; the headline numbers (PBs, world rank, records) DO also appear as static text, so crawlers see them — but keep it that way (don't move those into JS-only).
+## Factual items (resolved 2026-06-22 per Harry)
+1. ✅ **Student count:** standardised to **120+ students certified** site-wide (was "over 100" / "250+" / "100+").
+2. ✅ **"Deepest no-fins":** standardised to **"deepest no-fins freediver in Britain"** site-wide; removed all "second-deepest / British history but one" qualifiers (schema, FAQ, llms.txt, visible copy on index/records/sponsor/sponsor-print).
+3. **AEO parse note:** records.html's charts are JS-injected; the headline numbers (PBs, world rank, records) DO also appear as static text, so crawlers see them — keep it that way (don't move those into JS-only).
 
 ## Off-site / authority — to reach "best on the planet" (Harry's to drive)
 On-site work makes the site strong and *eligible*; ranking #1 for broad terms also needs off-site authority + indexing time:
