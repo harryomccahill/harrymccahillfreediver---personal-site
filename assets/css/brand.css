@@ -4,7 +4,8 @@
    Shared design tokens + components
    ============================================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Manrope:wght@300;400;500;600&family=Cinzel:wght@400;500&display=swap');
+/* Fonts are loaded via a <link> in each page <head> (not @import here) to
+   avoid a render-blocking CSS->font request chain. See <head> font preconnects. */
 
 :root {
   /* --- Palette: "Depth through Stillness" --- */
