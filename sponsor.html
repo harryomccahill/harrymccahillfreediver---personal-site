@@ -19,11 +19,11 @@
 
   /* HERO */
   .s-hero { position: relative; background: var(--abyss); color: var(--mist); display: grid; grid-template-columns: 1.12fr 0.88fr; }
-  .s-hero__text { padding: clamp(44px,6vw,84px) clamp(28px,5vw,64px); display: flex; flex-direction: column; justify-content: center; }
-  .s-hero__text .eyebrow { color: var(--light); }
-  .s-hero h1 { font-family: var(--serif); font-weight: 300; font-size: clamp(36px,4.6vw,62px); line-height: 1.04; color: var(--mist); margin: 22px 0 0; letter-spacing: 0.01em; }
+  .s-hero__text { position: relative; padding: clamp(44px,6vw,84px) clamp(28px,5vw,64px); display: flex; flex-direction: column; justify-content: center; background-image: linear-gradient(90deg, rgba(6,20,29,0.5) 0%, rgba(6,20,29,0.66) 42%, rgba(6,20,29,0.9) 70%, var(--abyss) 100%), linear-gradient(180deg, transparent 58%, rgba(6,20,29,0.8) 100%), url("assets/photos-v2/union-jack-grunge.png"); background-size: cover; background-position: left center; background-repeat: no-repeat; }
+  .s-hero__text .eyebrow { color: var(--light); text-shadow: 0 1px 12px rgba(6,20,29,0.85); }
+  .s-hero h1 { font-family: var(--serif); font-weight: 300; font-size: clamp(36px,4.6vw,62px); line-height: 1.04; color: var(--mist); margin: 22px 0 0; letter-spacing: 0.01em; text-shadow: 0 2px 22px rgba(6,20,29,0.78); }
   .s-hero h1 em { font-style: italic; color: var(--light); }
-  .s-hero__sub { margin: 30px 0 0; font-size: clamp(15px,1.3vw,18px); line-height: 1.7; color: rgba(234,242,242,0.82); max-width: 42ch; }
+  .s-hero__sub { margin: 30px 0 0; font-size: clamp(15px,1.3vw,18px); line-height: 1.7; color: rgba(234,242,242,0.82); max-width: 42ch; text-shadow: 0 1px 16px rgba(6,20,29,0.7); }
   .s-hero__media { position: relative; overflow: hidden; min-height: 420px; }
   .s-hero__media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; }
   .s-hero__media::after { content: ""; position: absolute; inset: 0; background: linear-gradient(100deg, var(--abyss) 0%, rgba(6,20,29,0.1) 38%, transparent 60%); }
@@ -49,6 +49,22 @@
   .why-card .ix { font-family: var(--serif); font-size: 26px; color: var(--tide); }
   .why-card h3 { font-family: var(--serif); font-weight: 400; font-size: 22px; color: var(--deep); margin: 14px 0 10px; }
   .why-card p { font-size: 14.5px; line-height: 1.6; color: var(--slate); margin: 0; }
+
+  /* TRAJECTORY STRIP */
+  .traj__lead { font-size: clamp(14px,1.1vw,16px); line-height: 1.6; color: var(--slate); max-width: 60ch; margin: 0 0 clamp(20px,2.4vw,28px); }
+  .traj__lead b { color: var(--deep); font-weight: 600; }
+  .trajectory { display: grid; grid-template-columns: 1fr auto 1fr auto 1fr; align-items: stretch; gap: clamp(10px,1.6vw,18px); }
+  .traj__step { background: #fff; border: 1px solid rgba(14,58,82,0.08); border-radius: 8px; padding: clamp(18px,2vw,28px) clamp(14px,1.6vw,20px); text-align: center; }
+  .traj__step--now { background: var(--deep); border-color: var(--deep); }
+  .traj__year { font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--tide); }
+  .traj__step--now .traj__year { color: var(--light); }
+  .traj__rank { font-family: var(--serif); font-weight: 300; font-size: clamp(32px,4.2vw,56px); line-height: 1; color: var(--deep); margin-top: 12px; }
+  .traj__step--now .traj__rank { color: var(--mist); }
+  .traj__pts { font-size: 12.5px; color: var(--slate); margin-top: 9px; letter-spacing: 0.02em; }
+  .traj__step--now .traj__pts { color: rgba(234,242,242,0.74); }
+  .traj__arrow { align-self: center; font-family: var(--serif); font-size: clamp(20px,2.4vw,30px); color: var(--tide); }
+  .traj__src { font-size: 12px; color: var(--slate); margin: clamp(16px,1.8vw,22px) 0 clamp(30px,3.4vw,42px); }
+  @media (max-width: 720px) { .trajectory { grid-template-columns: 1fr; } .traj__arrow { transform: rotate(90deg); justify-self: center; } }
 
   /* BIO + PORTRAIT */
   .bio { background: var(--mist); display: grid; grid-template-columns: 0.8fr 1.2fr; gap: clamp(30px,5vw,64px); align-items: center; }
@@ -80,8 +96,53 @@
   .contact .handles a:hover { opacity: 1; color: var(--light); }
   .contact .base { margin-top: 30px; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(234,242,242,0.5); }
 
+  /* THE CLIMB / DATA */
+  .climb { background: var(--deep); color: var(--mist); }
+  .climb .block-head h2 { color: var(--mist); }
+  .climb__intro { font-size: clamp(15px,1.3vw,17px); line-height: 1.7; color: rgba(234,242,242,0.8); max-width: 64ch; margin: 0 0 clamp(28px,3.4vw,40px); }
+  .climb__stack { display: grid; gap: clamp(18px,2.4vw,28px); }
+  .climb__row { display: grid; grid-template-columns: 1.45fr 1fr; gap: clamp(18px,2.4vw,28px); align-items: stretch; }
+  .climb__panel { border: 1px solid rgba(124,196,206,0.18); background: color-mix(in oklab, var(--abyss) 55%, var(--deep)); padding: clamp(22px,2.6vw,32px); }
+  .climb__head { display: flex; align-items: baseline; justify-content: space-between; gap: 14px; flex-wrap: wrap; margin-bottom: clamp(16px,2vw,22px); }
+  .climb__title { font-size: 11px; letter-spacing: 0.26em; text-transform: uppercase; color: var(--light); }
+  .climb__hint { font-size: 12px; font-weight: 300; color: rgba(234,242,242,0.5); }
+
+  .chart { width: 100%; height: auto; display: block; overflow: visible; }
+  .chart .grid line { stroke: rgba(124,196,206,0.14); }
+  .chart .axis text { fill: rgba(234,242,242,0.5); font-family: var(--sans); font-size: 13px; letter-spacing: 0.04em; }
+  .chart .pt { stroke: var(--abyss); stroke-width: 1.5; transition: r 200ms var(--ease); }
+  .chart .pt.nr { stroke: var(--mist); stroke-width: 2.5; }
+  .chart-legend { display: flex; gap: clamp(14px,2.2vw,26px); flex-wrap: wrap; margin-top: 18px; }
+  .chart-legend span { display: inline-flex; align-items: center; gap: 8px; font-size: 11.5px; font-weight: 300; color: rgba(234,242,242,0.68); }
+  .chart-legend i { width: 10px; height: 10px; border-radius: 999px; display: inline-block; flex: none; }
+
+  .viz-tip { position: fixed; z-index: 80; pointer-events: none; opacity: 0; transform: translate(-50%,-128%); transition: opacity 160ms var(--ease); background: var(--abyss); border: 1px solid rgba(124,196,206,0.32); padding: 11px 14px; min-width: 160px; box-shadow: 0 14px 44px rgba(2,18,30,0.62); }
+  .viz-tip.on { opacity: 1; }
+  .viz-tip b { display: block; font-family: var(--sans); font-weight: 500; font-size: 12.5px; color: var(--mist); }
+  .viz-tip small { display: block; font-size: 11px; font-weight: 300; color: rgba(234,242,242,0.62); margin-top: 4px; line-height: 1.5; }
+  .viz-tip .tip-depth { font-family: var(--serif); font-size: 23px; color: var(--light); margin-top: 7px; line-height: 1; }
+
+  .wr__row { display: grid; grid-template-columns: clamp(96px,12vw,140px) 1fr auto; gap: clamp(12px,1.8vw,20px); align-items: center; padding: clamp(12px,1.6vw,17px) 0; border-top: 1px solid rgba(124,196,206,0.14); }
+  .wr__row:first-child { border-top: 0; }
+  .wr__disc b { display: block; font-family: var(--sans); font-weight: 600; font-size: 13.5px; color: var(--mist); letter-spacing: 0.05em; }
+  .wr__disc small { display: block; font-size: 11px; font-weight: 300; color: rgba(234,242,242,0.52); margin-top: 3px; }
+  .wr__track { position: relative; height: 7px; border-radius: 999px; background: rgba(124,196,206,0.14); overflow: hidden; }
+  .wr__fill { position: absolute; inset: 0 auto 0 0; border-radius: 999px; background: linear-gradient(90deg, color-mix(in oklab, var(--tide) 55%, var(--deep)), var(--tide)); width: 0; transition: width 1100ms var(--ease); }
+  .wr__pct { font-family: var(--serif); font-weight: 400; font-size: clamp(20px,2vw,26px); color: var(--mist); white-space: nowrap; }
+  .wr__pct small { font-size: 0.46em; color: var(--light); }
+  @media (prefers-reduced-motion: reduce) { .wr__fill { transition: none; } }
+
+  .rankstamp { border: 1px solid rgba(124,196,206,0.18); background: color-mix(in oklab, var(--abyss) 55%, var(--deep)); padding: clamp(22px,2.6vw,32px); display: flex; flex-direction: column; justify-content: center; }
+  .rankstamp__live { display: inline-flex; align-items: center; gap: 8px; font-size: 10.5px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--light); }
+  .rankstamp__live .dot { width: 7px; height: 7px; border-radius: 999px; background: #46d39a; flex: none; }
+  .rankstamp__num { font-family: var(--serif); font-weight: 300; font-size: clamp(52px,6.5vw,82px); line-height: 0.9; color: var(--mist); margin-top: 16px; }
+  .rankstamp__num b { font-style: normal; font-family: var(--sans); font-weight: 300; font-size: 0.3em; letter-spacing: 0.06em; text-transform: uppercase; color: var(--light); margin-right: 8px; vertical-align: baseline; }
+  .rankstamp__meta { font-size: 13px; font-weight: 300; color: rgba(234,242,242,0.66); margin-top: 12px; letter-spacing: 0.01em; line-height: 1.55; }
+  .rankstamp__link { margin-top: 20px; align-self: flex-start; font-size: 10.5px; letter-spacing: 0.2em; text-transform: uppercase; text-decoration: none; color: var(--light); border: 1px solid color-mix(in oklab, var(--light) 42%, transparent); border-radius: 999px; padding: 10px 18px; transition: background 320ms var(--ease), color 320ms var(--ease); }
+  .rankstamp__link:hover { background: var(--light); color: var(--deep); }
+
   @media (max-width: 860px) {
-    .s-hero, .headline-nums, .bio { grid-template-columns: 1fr; }
+    .s-hero, .headline-nums, .bio, .climb__row { grid-template-columns: 1fr; }
     .s-hero__media { min-height: 320px; order: -1; }
     .s-hero__media::after { background: linear-gradient(0deg, var(--abyss) 0%, transparent 50%); }
     .headline-nums .hn:first-child { border-right: 0; border-bottom: 1px solid var(--hair); }
@@ -92,7 +153,7 @@
   @media print {
     body, .sheet { background: #fff; }
     .topbar { display: none; }
-    .s-hero, .headline-nums, .proof, .contact { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .s-hero, .headline-nums, .proof, .contact, .climb { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   }
 </style>
 </head>
@@ -159,6 +220,15 @@
   <!-- WHY PARTNER -->
   <section class="block">
     <div class="block-head"><span class="no">01</span><h2>Why partner with Harry</h2></div>
+    <p class="traj__lead">The trajectory is the whole pitch. In overall world depth ranking, Harry has climbed from <b>#590 to #63 in two seasons</b> &mdash; points more than doubling from 169 to 346 &mdash; and the curve is still steepening.</p>
+    <div class="trajectory">
+      <div class="traj__step"><div class="traj__year">2024</div><div class="traj__rank">#590</div><div class="traj__pts">169 points</div></div>
+      <div class="traj__arrow" aria-hidden="true">&rarr;</div>
+      <div class="traj__step"><div class="traj__year">2025</div><div class="traj__rank">#348</div><div class="traj__pts">233 points</div></div>
+      <div class="traj__arrow" aria-hidden="true">&rarr;</div>
+      <div class="traj__step traj__step--now"><div class="traj__year">2026</div><div class="traj__rank">#63</div><div class="traj__pts">346 points</div></div>
+    </div>
+    <p class="traj__src">World depth ranking, all disciplines combined &middot; source: The Freedive Ranking.</p>
     <div class="why-grid">
       <div class="why-card">
         <div class="ix">↗</div>
@@ -178,6 +248,44 @@
     </div>
   </section>
 
+  <!-- THE CLIMB, MEASURED -->
+  <section class="block climb">
+    <div class="block-head"><span class="no">02</span><h2>The climb, measured</h2></div>
+    <p class="climb__intro">The trajectory is the pitch. Every point below is an official, judged competition dive &mdash; verified on The Freedive Ranking &mdash; tracing the rise from a first season in 2024 to the world's top tier in under two years.</p>
+    <div class="climb__stack">
+      <div class="climb__panel">
+        <div class="climb__head">
+          <span class="climb__title">Depth progression &middot; realised metres</span>
+          <span class="climb__hint">Every competition dive, 2024 &rarr; 2026</span>
+        </div>
+        <svg class="chart" id="depth-chart" viewBox="0 0 1000 380" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Depth progression chart of competition dives, 2024 to 2026"></svg>
+        <div class="chart-legend">
+          <span><i style="background:#d7eef2"></i>White card</span>
+          <span><i style="background:#e3b24e"></i>Penalty</span>
+          <span><i style="background:#d8584d"></i>Disqualified</span>
+          <span><i style="background:transparent;box-shadow:0 0 0 2px var(--mist)"></i>British national record</span>
+        </div>
+      </div>
+      <div class="climb__row">
+        <div class="climb__panel">
+          <div class="climb__head">
+            <span class="climb__title">Personal bests vs the world record</span>
+            <span class="climb__hint">depth as % of the men's world record</span>
+          </div>
+          <div class="wr" id="wr-bars"></div>
+        </div>
+        <div class="rankstamp">
+          <span class="rankstamp__live"><span class="dot"></span>Live &middot; The Freedive Ranking</span>
+          <div class="rankstamp__num"><b>No.</b>63</div>
+          <div class="rankstamp__meta">overall world depth ranking &middot; United Kingdom &middot; independently verified and updated through the season.</div>
+          <a class="rankstamp__link" href="https://freediveranking.com/athlete/Harry-McCahill" target="_blank" rel="noopener">Verify the ranking &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="viz-tip" id="viz-tip" aria-hidden="true"></div>
+
   <!-- BIO -->
   <section class="block bio">
     <div class="bio__media" style="position:relative">
@@ -192,7 +300,7 @@
 
   <!-- PROOF LOCKER -->
   <section class="block proof">
-    <div class="block-head"><span class="no">02</span><h2>Proof points</h2></div>
+    <div class="block-head"><span class="no">03</span><h2>Proof points</h2></div>
     <ul class="proof-list">
       <li><span class="dot"></span><span class="pt"><b>8th in the world</b> in Constant Weight No Fins, 2025.</span></li>
       <li><span class="dot"></span><span class="pt"><b>Deepest no-fins diver in the UK</b> · 2024, 2025, 2026 — second-deepest in British history.</span></li>
@@ -207,7 +315,7 @@
 
   <!-- REACH -->
   <section class="block">
-    <div class="block-head"><span class="no">03</span><h2>Platform &amp; reach</h2></div>
+    <div class="block-head"><span class="no">04</span><h2>Platform &amp; reach</h2></div>
     <div class="reach-grid">
       <div class="reach"><div class="p">Instagram</div><div class="l">@harrymccahill</div></div>
       <div class="reach"><div class="p">TikTok</div><div class="l">@harryomccahill</div></div>
@@ -232,5 +340,92 @@
   </section>
 
 </div>
+<script>
+  /* Official competition log, transcribed from The Freedive Ranking (AIDA + CMAS).
+     card: 'w' white (clean) · 'y' penalty · 'r' disqualified. */
+  const DIVES = [
+    { d:'2024-07-27', e:'CMAS Deep Dominica 2024', f:'CMAS', disc:'CNF',  a:68, r:68, c:'w', n:'British national record' },
+    { d:'2024-07-30', e:'CMAS Deep Dominica 2024', f:'CMAS', disc:'CNF',  a:72, r:32, c:'y', n:'Early tag' },
+    { d:'2024-07-31', e:'CMAS Deep Dominica 2024', f:'CMAS', disc:'CNF',  a:72, r:72, c:'w', n:'British national record' },
+    { d:'2024-08-03', e:'CMAS Deep Dominica 2024', f:'CMAS', disc:'CNF',  a:75, r:56, c:'r', n:'DQ — pull' },
+    { d:'2024-10-07', e:'8th CMAS World Championship — Kalamata', f:'CMAS', disc:'FIM',  a:60, r:57, c:'y', n:'Early turn' },
+    { d:'2024-10-09', e:'8th CMAS World Championship — Kalamata', f:'CMAS', disc:'CNF',  a:62, r:62, c:'w', n:'' },
+    { d:'2024-10-11', e:'8th CMAS World Championship — Kalamata', f:'CMAS', disc:'CWTB', a:70, r:57, c:'y', n:'Early turn' },
+    { d:'2024-11-28', e:'CMAS Deep Dominica Nov 2024', f:'CMAS', disc:'CNF',  a:52, r:52, c:'r', n:'DQ' },
+    { d:'2024-11-30', e:'CMAS Deep Dominica Nov 2024', f:'CMAS', disc:'CNF',  a:73, r:64, c:'y', n:'' },
+    { d:'2024-12-01', e:'CMAS Deep Dominica Nov 2024', f:'CMAS', disc:'CNF',  a:73, r:73, c:'w', n:'British national record' },
+    { d:'2025-07-02', e:'Vertical Blue 2025', f:'CMAS', disc:'CNF',  a:65, r:60, c:'r', n:'DQ' },
+    { d:'2025-07-05', e:'Vertical Blue 2025', f:'CMAS', disc:'CNF',  a:60, r:60, c:'w', n:'' },
+    { d:'2025-07-06', e:'Vertical Blue 2025', f:'CMAS', disc:'CNF',  a:65, r:65, c:'w', n:'' },
+    { d:'2025-11-20', e:'AIDA Blue Element Competition 2025', f:'AIDA', disc:'CNF',  a:70, r:57, c:'y', n:'' },
+    { d:'2025-11-22', e:'AIDA Blue Element Competition 2025', f:'AIDA', disc:'CWT',  a:80, r:69, c:'y', n:'' },
+    { d:'2025-11-23', e:'AIDA Blue Element Competition 2025', f:'AIDA', disc:'CNF',  a:60, r:60, c:'r', n:'DQ' },
+    { d:'2025-11-26', e:'Blue Element Invitational', f:'AIDA', disc:'FIM',  a:80, r:62, c:'y', n:'' },
+    { d:'2025-11-29', e:'Blue Element Invitational', f:'AIDA', disc:'CNF',  a:70, r:70, c:'w', n:'' },
+    { d:'2025-11-30', e:'Blue Element Invitational', f:'AIDA', disc:'CNF',  a:80, r:80, c:'w', n:'' },
+    { d:'2026-03-18', e:'AIDA Blue Element March Mini', f:'AIDA', disc:'CWT',  a:69, r:69, c:'w', n:'' },
+    { d:'2026-03-19', e:'AIDA Blue Element March Mini', f:'AIDA', disc:'CWT',  a:79, r:79, c:'w', n:'' },
+    { d:'2026-03-21', e:'AIDA Blue Element March Mini', f:'AIDA', disc:'CWT',  a:88, r:81, c:'y', n:'' },
+    { d:'2026-03-22', e:'AIDA Blue Element March Mini', f:'AIDA', disc:'CWT',  a:88, r:88, c:'w', n:'' },
+    { d:'2026-05-16', e:'AIDA Blue Element May Open 2026', f:'AIDA', disc:'CWT',  a:91, r:91, c:'w', n:'' },
+    { d:'2026-05-19', e:'AIDA Blue Element May Open 2026', f:'AIDA', disc:'CWT',  a:96, r:77, c:'y', n:'' },
+    { d:'2026-05-20', e:'AIDA Blue Element May Open 2026', f:'AIDA', disc:'CWTB', a:85, r:85, c:'w', n:'' },
+    { d:'2026-05-22', e:'AIDA Blue Element May Open 2026', f:'AIDA', disc:'FIM',  a:92, r:86, c:'y', n:'' },
+    { d:'2026-05-23', e:'AIDA Blue Element May Open 2026', f:'AIDA', disc:'FIM',  a:90, r:90, c:'w', n:'' }
+  ];
+  const WR = [
+    { disc:'CNF',  name:'No fins',        pct:78, natl:2, world:21  },
+    { disc:'CWT',  name:'With fins',      pct:67, natl:6, world:159 },
+    { disc:'FIM',  name:'Free immersion', pct:66, natl:7, world:120 },
+    { disc:'CWTB', name:'Bi-fins',        pct:66, natl:9, world:135 }
+  ];
+  (function () {
+    const COL = { w: '#d7eef2', y: '#e3b24e', r: '#d8584d' };
+    const CARDNAME = { w: 'White card', y: 'Penalty', r: 'Disqualified' };
+    const svg = document.getElementById('depth-chart');
+    const tip = document.getElementById('viz-tip');
+    if (svg) {
+      const W = 1000, H = 380, padL = 48, padR = 20, padT = 20, padB = 42;
+      const xL = padL, xR = W - padR, yB = H - padB, yT = padT;
+      const realised = DIVES.map(v => v.r);
+      const aMin = Math.floor((Math.min.apply(null, realised) - 2) / 10) * 10;
+      const aMax = Math.max(100, Math.ceil((Math.max.apply(null, realised) + 2) / 5) * 5);
+      const sx = i => xL + (xR - xL) * (i / (DIVES.length - 1));
+      const sy = m => yB + (yT - yB) * ((m - aMin) / (aMax - aMin));
+      const ticks = []; for (let m = aMin; m <= aMax + 0.001; m += 10) ticks.push(m);
+      let s = '<g class="grid">';
+      ticks.forEach(m => { const y = sy(m); s += '<line x1="' + xL + '" y1="' + y + '" x2="' + xR + '" y2="' + y + '"></line>'; });
+      s += '</g><g class="axis">';
+      ticks.forEach(m => { const y = sy(m); s += '<text x="' + (xL - 10) + '" y="' + (y + 4) + '" text-anchor="end">' + m + 'm</text>'; });
+      [2024, 2025, 2026].forEach(yr => {
+        const idx = DIVES.findIndex(v => v.d.slice(0, 4) == yr);
+        if (idx >= 0) s += '<text x="' + sx(idx).toFixed(1) + '" y="' + (yB + 28) + '" text-anchor="' + (idx === 0 ? 'start' : 'middle') + '">' + yr + '</text>';
+      });
+      s += '</g>';
+      DIVES.forEach((v, i) => {
+        const nr = /national record/i.test(v.n || '');
+        s += '<circle class="pt' + (nr ? ' nr' : '') + '" data-i="' + i + '" cx="' + sx(i).toFixed(1) + '" cy="' + sy(v.r).toFixed(1) + '" r="5" fill="' + COL[v.c] + '"></circle>';
+      });
+      svg.innerHTML = s;
+      svg.querySelectorAll('.pt').forEach(c => {
+        c.addEventListener('mouseenter', () => {
+          const v = DIVES[+c.dataset.i];
+          const dt = new Date(v.d + 'T00:00:00').toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+          tip.innerHTML = '<b>' + v.e + '</b><small>' + dt + ' · ' + v.disc + ' · ' + CARDNAME[v.c] + (v.n ? ' · ' + v.n : '') + '</small><div class="tip-depth">' + v.r + ' m</div>';
+          tip.classList.add('on'); c.setAttribute('r', 7);
+        });
+        c.addEventListener('mousemove', ev => { tip.style.left = ev.clientX + 'px'; tip.style.top = ev.clientY + 'px'; });
+        c.addEventListener('mouseleave', () => { tip.classList.remove('on'); c.setAttribute('r', 5); });
+      });
+    }
+    const wr = document.getElementById('wr-bars');
+    if (wr) {
+      wr.innerHTML = WR.map(d => '<div class="wr__row"><div class="wr__disc"><b>' + d.disc + '</b><small>' + d.name + ' · Nat #' + d.natl + ' · World #' + d.world + '</small></div>' +
+        '<div class="wr__track"><span class="wr__fill" data-pct="' + d.pct + '"></span></div>' +
+        '<div class="wr__pct">' + d.pct + '<small>%</small></div></div>').join('');
+      setTimeout(() => { wr.querySelectorAll('.wr__fill').forEach(f => { f.style.width = f.dataset.pct + '%'; }); }, 180);
+    }
+  })();
+</script>
 </body>
 </html>
