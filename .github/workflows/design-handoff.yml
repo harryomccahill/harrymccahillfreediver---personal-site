@@ -1,1 +1,42 @@
+name: Design Handoff → Claude Code
 
+on:
+  push:
+    branches: [main]
+    paths:
+      - "design_handoff/latest/**"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
+jobs:
+  implement-handoff:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Run Claude Code on the latest handoff
+        uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          prompt: |
+            A new design handoff has been pushed to `design_handoff/latest/`.
+
+            1. Read `design_handoff/latest/CHANGES.md` for the task summary and
+               `design_handoff/latest/README.md` for the full implementation spec
+               (exact colors, type, spacing, layout, interactions, state).
+            2. The `.html` files in that folder are DESIGN REFERENCES only — do not
+               ship them. Recreate the design in this codebase using its existing
+               framework, components, and patterns.
+            3. Use the specialised subagents in `.claude/agents/` where relevant.
+            4. Match the spec pixel-for-pixel (it is high-fidelity unless the README
+               says otherwise).
+            5. Open a pull request with your implementation. Do NOT push to main directly.
+          claude_args: |
+            --max-turns 40
