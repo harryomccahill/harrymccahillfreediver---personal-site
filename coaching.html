@@ -27,10 +27,9 @@
     position: fixed; inset: 0 0 auto 0; z-index: 50;
     display: flex; align-items: center; justify-content: space-between;
     padding: 22px var(--gutter);
-    background: rgba(6,20,29,0.82); backdrop-filter: blur(14px);
-    transition: background 480ms var(--ease), padding 480ms var(--ease);
+    transition: background 480ms var(--ease), padding 480ms var(--ease), backdrop-filter 480ms var(--ease);
   }
-  .nav.scrolled { padding: 14px var(--gutter); }
+  .nav.scrolled { background: rgba(6,20,29,0.82); backdrop-filter: blur(14px); padding: 14px var(--gutter); }
   .nav__brand { display: flex; align-items: center; gap: 13px; text-decoration: none; }
   .nav__brand .wm { font-size: clamp(17px, 1.35vw, 20px); }
   .nav__links { display: flex; gap: clamp(18px, 2.6vw, 40px); align-items: center; }
@@ -251,7 +250,7 @@
 </nav>
 
 <header class="hero" data-screen-label="Coaching hero">
-  <img class="hero__img" src="assets/photos-v2/split-shot-soufriere.jpg" alt="Over-under split shot of Soufrière Bay, Dominica — lush coastline above, clear blue water below">
+  <img class="hero__img" src="assets/photos-v2/coaching-hero-platform.jpg" alt="Over-under view at the Blue Element platform — freedivers at the surface and finning below, Soufrière Bay, Dominica">
   <div class="hero__scrim"></div>
   <div class="hero__inner">
     <p class="eyebrow on-dark hero__eyebrow reveal in">AIDA Master Instructor · Soufrière Bay, Dominica</p>
@@ -376,8 +375,8 @@
   </div>
   <div class="two-col">
     <figure class="photo reveal">
-      <img src="assets/photos-v2/harry-line-descent.jpg" alt="Three freedivers descending the line into deep blue water, Soufrière Bay, Dominica">
-      <span class="cap">Coached line sessions · Soufrière Bay</span>
+      <img src="assets/photos-v2/depth-camp-blue-element.jpg" alt="Freedivers at a Blue Element depth camp gathered at the surface platform, lush Dominica coastline behind, fins below the waterline">
+      <span class="cap">Depth camp at Blue Element with Johnny Sunnex</span>
       <span class="credit">Daan Verhoeven</span>
     </figure>
     <div>
