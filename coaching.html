@@ -101,7 +101,7 @@
     border: 1px solid rgba(234,242,242,0.45); border-radius: 999px;
     padding: 9px 18px;
   }
-  @media (max-width: 720px) { .nav__links a:not(.cta) { display: none; } }
+  /* mobile nav (hamburger + slide-down panel) is handled in brand.css */
 
   /* ============ HERO ============ */
   .hero {
@@ -287,7 +287,8 @@
     </svg>
     <span class="wordmark on-dark wm">Harry McCahill</span>
   </a>
-  <div class="nav__links">
+  <div class="nav__right">
+    <div class="nav__links" id="navMenu">
     <a href="index.html#story">Story</a>
     <a href="records.html">Records</a>
     <div class="nav__item has-drop">
@@ -302,7 +303,11 @@
     </div>
     <a href="media.html">Media</a>
     <a href="blog.html">Journal</a>
+    </div>
     <a href="sponsor.html" class="cta">Partner</a>
+    <button class="nav__toggle" id="navToggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="navMenu">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </nav>
 
@@ -645,6 +650,17 @@
 
 <script>
   const nav = document.getElementById('nav');
+  const navToggle = document.getElementById('navToggle');
+  const navMenu = document.getElementById('navMenu');
+  if (navToggle) {
+    navToggle.addEventListener('click', () => {
+      const open = nav.classList.toggle('menu-open');
+      navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    if (navMenu) navMenu.addEventListener('click', (e) => {
+      if (e.target.closest('a')) { nav.classList.remove('menu-open'); navToggle.setAttribute('aria-expanded', 'false'); }
+    });
+  }
   addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 40), { passive: true });
 
   const pending = [...document.querySelectorAll('.reveal:not(.in)')];

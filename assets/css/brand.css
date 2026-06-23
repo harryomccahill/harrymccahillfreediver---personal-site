@@ -4,8 +4,8 @@
    Shared design tokens + components
    ============================================================ */
 
-/* Fonts are loaded via a <link> in each page <head> (not @import here) to
-   avoid a render-blocking CSS->font request chain. See <head> font preconnects. */
+/* Fonts are loaded via a non-blocking <link> in each page <head> (not @import here)
+   to avoid a render-blocking CSS->font request chain. See the <head> font preconnects. */
 
 :root {
   /* --- Palette: "Depth through Stillness" --- */
@@ -237,4 +237,52 @@ p { text-wrap: pretty; }
   transition: background var(--dur) var(--ease), color var(--dur) var(--ease), opacity var(--dur) var(--ease);
 }
 .nav .nav__drop a:hover { background: rgba(124,196,206,0.14); color: var(--light); opacity: 1; }
-@media (max-width: 720px) { .nav__item { display: none; } .nav__drop { display: none; } }
+/* ---------- Mobile nav: hamburger + slide-down panel (shared) ---------- */
+.nav__right { display: flex; align-items: center; gap: clamp(18px, 2.6vw, 40px); }
+/* Partner CTA now lives in .nav__right (moved out of .nav__links) — restore its pill look */
+.nav__right > .cta {
+  font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase; white-space: nowrap;
+  text-decoration: none; color: var(--mist); opacity: 0.82;
+  border: 1px solid rgba(234,242,242,0.45); border-radius: 999px; padding: 9px 18px;
+  transition: opacity 320ms var(--ease), background 320ms var(--ease), color 320ms var(--ease);
+}
+.nav__right > .cta:hover { opacity: 1; }
+.nav__toggle {
+  display: none; width: 44px; height: 44px; padding: 0; flex: none;
+  flex-direction: column; align-items: center; justify-content: center; gap: 4px;
+  background: transparent; border: 1px solid rgba(234,242,242,0.42); border-radius: 999px;
+  cursor: pointer; -webkit-tap-highlight-color: transparent;
+}
+.nav__toggle span { display: block; width: 17px; height: 1.5px; background: var(--mist);
+  transition: transform var(--dur) var(--ease), opacity var(--dur) var(--ease); }
+.nav.menu-open .nav__toggle span:nth-child(1) { transform: translateY(5.5px) rotate(45deg); }
+.nav.menu-open .nav__toggle span:nth-child(2) { opacity: 0; }
+.nav.menu-open .nav__toggle span:nth-child(3) { transform: translateY(-5.5px) rotate(-45deg); }
+
+@media (max-width: 720px) {
+  .nav .nav__toggle { display: inline-flex; }
+  .nav.menu-open { background: rgba(6,20,29,0.96); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); }
+  .nav .nav__links {
+    position: absolute; top: 100%; left: 0; right: 0;
+    flex-direction: column; align-items: stretch; gap: 0;
+    background: rgba(6,20,29,0.97); -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px);
+    border-top: 1px solid rgba(124,196,206,0.18);
+    padding: 0 var(--gutter);
+    max-height: 0; overflow: hidden; opacity: 0; visibility: hidden;
+    transition: max-height 460ms var(--ease), opacity 300ms var(--ease), padding 460ms var(--ease), visibility 460ms var(--ease);
+  }
+  .nav.menu-open .nav__links { max-height: 82vh; overflow-y: auto; opacity: 1; visibility: visible; padding: 4px var(--gutter) 20px; }
+  .nav .nav__links > a, .nav .nav__item .nav__top {
+    width: 100%; padding: 16px 2px; font-size: 13px; letter-spacing: 0.22em; opacity: 0.92;
+    border-bottom: 1px solid rgba(234,242,242,0.10);
+  }
+  .nav .nav__item { display: block; width: 100%; position: static; }
+  .nav .nav__top::after { display: none; }
+  .nav .nav__drop {
+    position: static; opacity: 1; visibility: visible; transform: none;
+    min-width: 0; margin: 0; padding: 2px 0 10px 14px;
+    background: none; -webkit-backdrop-filter: none; backdrop-filter: none;
+    border: none; box-shadow: none; border-radius: 0;
+  }
+  .nav .nav__drop a { padding: 9px 0; font-size: 10.5px; opacity: 0.72; border: none; }
+}
