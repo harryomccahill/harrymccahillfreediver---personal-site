@@ -141,6 +141,15 @@
     .filmfeature__stats { justify-content: center; }
   }
 
+  /* ============ WORLD-RECORD EMBEDS ============ */
+  .wrgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: clamp(16px, 2vw, 24px); margin-top: clamp(24px, 3vw, 40px); }
+  .wrcard { background: var(--deep); border: 1px solid rgba(124,196,206,0.18); border-radius: 8px; overflow: hidden; margin: 0; }
+  .wrcard__frame { position: relative; aspect-ratio: 16 / 9; background: #08222f; }
+  .wrcard__frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  .wrcard__cap { padding: clamp(14px, 1.6vw, 20px); }
+  .wrcard__d { font-size: 10.5px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--light); }
+  .wrcard__t { margin: 8px 0 0; font-size: clamp(14px, 1.05vw, 16px); font-weight: 400; line-height: 1.4; color: var(--mist); }
+
   /* ============ CHANNELS ============ */
   .channels { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1px; background: rgba(124,196,206,0.18); border: 1px solid rgba(124,196,206,0.18); }
   .channel { background: var(--abyss); padding: clamp(26px, 3vw, 40px) clamp(20px, 2.4vw, 32px); text-decoration: none; display: flex; flex-direction: column; gap: 8px; transition: background 420ms var(--ease); }
@@ -331,6 +340,35 @@
       <span class="film__play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
     </div>
   </a>
+  <p class="filmfeature__label reveal" data-d="1" style="margin-top: clamp(44px, 5vw, 76px);">Six world records · called live</p>
+  <h3 class="filmfeature__title reveal" data-d="1" style="margin-top: 14px;">The dives I <em>called.</em></h3>
+  <p class="filmfeature__desc reveal" data-d="1" style="max-width: 64ch;">Six freediving world records fell at Vertical Blue 2023 — and Harry was on the mic for every one. The record dives, as they happened:</p>
+  <div class="wrgrid reveal" data-d="1">
+    <figure class="wrcard">
+      <div class="wrcard__frame"><iframe loading="lazy" src="https://www.youtube-nocookie.com/embed/-C10_P0b5dE" title="Alexey Molchanov WORLD RECORD 133m CWT at Vertical Blue 2023" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+      <figcaption class="wrcard__cap"><div class="wrcard__d">CWT · 133 m · World record</div><div class="wrcard__t">Alexey Molchanov</div></figcaption>
+    </figure>
+    <figure class="wrcard">
+      <div class="wrcard__frame"><iframe loading="lazy" src="https://www.youtube-nocookie.com/embed/S-ycGTYUcrU" title="Alexey Molchanov WORLD RECORD 133m Free Immersion at Vertical Blue 2023" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+      <figcaption class="wrcard__cap"><div class="wrcard__d">FIM · 133 m · World record</div><div class="wrcard__t">Alexey Molchanov</div></figcaption>
+    </figure>
+    <figure class="wrcard">
+      <div class="wrcard__frame"><iframe loading="lazy" src="https://www.youtube-nocookie.com/embed/uJlcVT6RN1U" title="Alenka Artnik of Slovenia WORLD RECORD in bi-fins 111m CWTB" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+      <figcaption class="wrcard__cap"><div class="wrcard__d">CWTB · 111 m · World record</div><div class="wrcard__t">Alenka Artnik — Slovenia</div></figcaption>
+    </figure>
+    <figure class="wrcard">
+      <div class="wrcard__frame"><iframe loading="lazy" src="https://www.youtube-nocookie.com/embed/XHiHfdnbwhc" title="Alenka Artnik of Slovenia WORLD RECORD 109 meters CWTB" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+      <figcaption class="wrcard__cap"><div class="wrcard__d">CWTB · 109 m · World record</div><div class="wrcard__t">Alenka Artnik — Slovenia</div></figcaption>
+    </figure>
+    <figure class="wrcard">
+      <div class="wrcard__frame"><iframe loading="lazy" src="https://www.youtube-nocookie.com/embed/x2NsOZjAsGU" title="Fatima Korok of Hungary WORLD RECORD dive to 102 meter FIM at Vertical Blue 2023" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+      <figcaption class="wrcard__cap"><div class="wrcard__d">FIM · 102 m · World record</div><div class="wrcard__t">Fatima Korok — Hungary</div></figcaption>
+    </figure>
+    <figure class="wrcard">
+      <div class="wrcard__frame"><iframe loading="lazy" src="https://www.youtube-nocookie.com/embed/USuMTkUlL_A" title="Kateryna Sadurska of Ukraine WORLD RECORD CNF dive to 76m at Vertical Blue 2023" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+      <figcaption class="wrcard__cap"><div class="wrcard__d">CNF · 76 m · World record</div><div class="wrcard__t">Kateryna Sadurska — Ukraine</div></figcaption>
+    </figure>
+  </div>
   <!-- MONTAGE: when Harry's "best of commentary" highlights reel is uploaded to
        @harrymccahillfreediver, point the href above to that video and change the
        small label to "Watch the commentary reel" (or add a featured 16:9 player here). -->
